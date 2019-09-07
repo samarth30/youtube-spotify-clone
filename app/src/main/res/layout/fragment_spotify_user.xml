@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".spotify_files.spotify_user">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <Button
         android:id="@+id/log_out"
         android:layout_width="wrap_content"

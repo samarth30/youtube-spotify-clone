@@ -21,8 +21,8 @@ public class Platform_choose extends AppCompatActivity {
         youtube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo Later change to youtube
-                startActivity(new Intent(Platform_choose.this, com.example.dell.spotify_clone_main.UI.spotify.class));
+
+                startActivity(new Intent(Platform_choose.this, com.example.dell.spotify_clone_main.UI.youtube.class));
             }
         });
 

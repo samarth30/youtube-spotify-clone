@@ -33,7 +33,7 @@ public class spotify extends AppCompatActivity {
         spotify_user = new spotify_user();
         spotify_search = new spotify_search();
 
-        setFragment(spotify_playlist);
+        setFragment(spotify_search);
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

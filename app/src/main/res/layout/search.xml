@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.MainActivity">
+    android:background="#0d0d0d"
+    >
 
     <LinearLayout
         android:id="@+id/linearlayout"
@@ -14,17 +15,61 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/edittextSearch"
-            android:layout_weight="7"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:id="@+id/relLayout1"
+            android:layout_width="250dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="10dp"
+            android:animationCache="true"
+            android:background="@drawable/bgsearchview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="31dp">
+
+            <ImageView
+                android:id="@+id/ic_magnify"
+                android:layout_width="30dp"
+                android:layout_height="23dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginBottom="13dp"
+                app:srcCompat="@drawable/ic_search_black_24dp" />
+
+            <EditText
+                android:id="@+id/edittextSearch"
+                android:layout_width="292dp"
+                android:layout_height="51dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_toRightOf="@+id/ic_magnify"
+                android:background="@null"
+                android:hint="Enter song you want to listen"
+                android:textColorHint="@android:color/black"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
         <Button
-            android:text="Search"
             android:id="@+id/buttonSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="8dp"
             android:layout_weight="3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:drawableLeft="@drawable/ic_search_white_24dp"
+            android:background="@color/cardview_dark_background"
+            android:text="Search"
+            android:textColor="@android:color/white" />
     </LinearLayout>
     <ListView
         android:id="@+id/listview"

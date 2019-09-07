@@ -23,5 +23,6 @@ public class youtube_user extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_youtube_user, container, false);
+
     }
 }

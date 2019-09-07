@@ -11,6 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".spotify_files.rsplayer"/>
+        <activity android:name=".spotify_files.SearchActivity"/>
+        <activity android:name=".spotify_files.spotify_player_activity_main"
+            android:noHistory="true"
+            >
+
+        </activity>
+         <activity android:name=".youtube_files.youtube_search_activity"/>
+        <activity android:name=".youtube_files.playvideoActivity"/>
         <activity android:name=".UI.LoginAct"
 
             />
@@ -19,11 +28,11 @@
             />
         <activity
             android:name=".UI.spotify"
-            android:label="@string/title_activity_spotify">
+           >
         </activity>
         <activity
             android:name=".UI.youtube"
-            android:label="@string/title_activity_youtube">
+           >
 
         </activity>
         <activity android:name=".UI.Platform_choose" />
@@ -35,6 +44,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.spotify.sdk.android.authentication.LoginActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 
 </manifest>

@@ -1,12 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".youtube_files.youtube_search">
 
-    <!-- TODO: Update blank fragment layout -->
+   <android.support.constraint.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
-    <include layout="@layout/search"/>
+      <ImageView
+          android:id="@+id/imageYoutube"
+          android:layout_width="300dp"
+          android:layout_height="229dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginLeft="8dp"
+          android:layout_marginTop="84dp"
+          android:layout_marginEnd="8dp"
+          android:layout_marginRight="8dp"
+          android:src="@drawable/youtube3"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.463"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+          android:id="@+id/youtube"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="8dp"
+          android:layout_marginLeft="8dp"
+          android:layout_marginTop="12dp"
+          android:layout_marginEnd="8dp"
+          android:layout_marginRight="8dp"
+          android:text="YouTube"
+          android:textColor="@android:color/white"
+          android:textSize="70dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/imageYoutube" />
+
+
+      <Button
+          android:id="@+id/buttonSearch"
+          android:layout_width="122dp"
+          android:layout_height="51dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="64dp"
+          android:layout_marginEnd="8dp"
+          android:layout_weight="3"
+          android:background="#ff0000"
+          android:drawableLeft="@drawable/ic_search_white_24dp"
+          android:text="search"
+          android:textSize="20sp"
+          android:textColor="@android:color/white"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/youtube">
+
+      </Button>
+
+
+   </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

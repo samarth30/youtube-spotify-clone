@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.example.dell.spotify_clone_main.R;
 import com.example.dell.spotify_clone_main.youtube_files.youtube_playlist;
@@ -32,6 +31,7 @@ public class youtube extends AppCompatActivity {
         youtube_Playlist = new youtube_playlist();
         youtube_Search = new youtube_search();
         youtube_User = new youtube_user();
+
 
         setFragment(youtube_Search);
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

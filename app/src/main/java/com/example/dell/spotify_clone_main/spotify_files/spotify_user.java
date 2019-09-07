@@ -32,11 +32,11 @@ public class spotify_user extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_spotify_user, container, false);
+        view = inflater.inflate(R.layout.fragment_youtube_user, container, false);
         mContext = view.getContext();
 
         //
-        view.setBackgroundColor(Color.WHITE);
+
 
         Button Log_out = (Button) view.findViewById(R.id.log_out);
         Log_out.setOnClickListener(new View.OnClickListener() {
