@@ -3,6 +3,7 @@ package com.example.dell.spotify_clone_main.UI;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -40,7 +41,7 @@ public class LoginAct extends AppCompatActivity {
 
 
     String URL = "https://aasthamalik31.pythonanywhere.com/user/login/";
-
+    public static String TokenFinal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +133,7 @@ public class LoginAct extends AppCompatActivity {
 
                     if (Logged) {
                         String token = jsonObject.getString("token");
+                        TokenFinal = token;
                         SharedPrefManager.getInstance(getApplicationContext()).userLogin(token);
                         loading.setVisibility(View.GONE);
                         btnLogin_login.setVisibility(View.VISIBLE);

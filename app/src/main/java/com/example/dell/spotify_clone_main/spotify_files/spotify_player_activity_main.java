@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 
 import com.android.volley.RequestQueue;
 import com.example.dell.spotify_clone_main.R;
+import com.example.dell.spotify_clone_main.adapters.ExampleAdapter;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;

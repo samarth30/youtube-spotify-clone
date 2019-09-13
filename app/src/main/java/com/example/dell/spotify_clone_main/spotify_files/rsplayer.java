@@ -1,15 +1,12 @@
 package com.example.dell.spotify_clone_main.spotify_files;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,6 +20,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.bumptech.glide.Glide;
 import com.example.dell.spotify_clone_main.R;
+import com.example.dell.spotify_clone_main.adapters.ExampleAdapter;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
@@ -41,6 +39,8 @@ public class rsplayer extends AppCompatActivity implements
         NotificationCallback, ConnectionStateCallback
 {
 
+
+    // TODO: Replace with your client ID
     private static final String CLIENT_ID = "d97e6af9d329405d997632c60fe79a16";
 
     // TODO: Replace with your redirect URI
@@ -115,12 +115,8 @@ public class rsplayer extends AppCompatActivity implements
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-                if (progress==100)
-                {
-                    finish();
-                    killMe=true;
-                    startActivity(new Intent(rsplayer.this,SearchActivity.class));
-                }
+
+
 
             }
 
@@ -186,33 +182,35 @@ public class rsplayer extends AppCompatActivity implements
     @Override
     public void onLoggedIn() {
 
+
     }
 
     @Override
     public void onLoggedOut() {
+
 
     }
 
     @Override
     public void onLoginFailed(Error error) {
 
+
     }
 
     @Override
     public void onTemporaryError() {
-
 
     }
 
     @Override
     public void onConnectionMessage(String s) {
 
-
     }
 
 
     @Override
     public void onPlaybackEvent(PlayerEvent playerEvent) {
+
 
 
         if (mPlayer.getPlaybackState().isPlaying)
@@ -225,12 +223,12 @@ public class rsplayer extends AppCompatActivity implements
                 if(event.getAction() == MotionEvent.ACTION_UP){
                     // i have been touched
                     istouching = false;
-//                    Toast.makeText(getBaseContext(), "you touched me?!! - i will tell my mom", Toast.LENGTH_SHORT).show();
+
                     return true;
                 }
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
                     // you can implement this
-//                    Toast.makeText(getBaseContext(), "shhh; i am touching", Toast.LENGTH_SHORT).show();
+
                     istouching = true;
                     return true;
                 }
@@ -254,7 +252,7 @@ public class rsplayer extends AppCompatActivity implements
                 float wowInt= ((wow/lengthms)*100);
                 if (seekusedbyuser==false||istouching==false)
                 { seekbar.setProgress((int) wowInt);}
-//                Toast.makeText(rsplayer.this, "God is awesome", Toast.LENGTH_SHORT).show();
+
             }
         };
         handler.postDelayed(my, 2000);
@@ -265,7 +263,7 @@ public class rsplayer extends AppCompatActivity implements
 
     @Override
     public void onPlaybackError(Error error) {
-//        Toast.makeText(this, "a", Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -273,30 +271,43 @@ public class rsplayer extends AppCompatActivity implements
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
-//        Toast.makeText(this, "aa", Toast.LENGTH_SHORT).show();
+
 
     }
 
-    @Override
-    protected void onUserLeaveHint() {
-        super.onUserLeaveHint();
-        if (handler!=null)
-            handler.removeCallbacks(my);
-        killMe=true;
-    }
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        handler.removeCallbacks(my);
+        if (handler!=null)
+            handler.removeCallbacksAndMessages(my);
         killMe=true;
+
+        mPlayer.pause(null);
+
 
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        handler.removeCallbacksAndMessages(my);
+        if (handler!=null)
+            handler.removeCallbacksAndMessages(my);
         killMe=true;
+
+        mPlayer.pause(null);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (handler!=null)
+            handler.removeCallbacksAndMessages(my);
+        killMe=true;
+
+        mPlayer.pause(null);
+
     }
 }

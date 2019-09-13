@@ -1,4 +1,4 @@
-package com.example.dell.spotify_clone_main.spotify_files;
+package com.example.dell.spotify_clone_main.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.dell.spotify_clone_main.R;
+import com.example.dell.spotify_clone_main.spotify_files.ExampleItem;
 
 import java.util.ArrayList;
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,8 +19,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dell.spotify_clone_main.R;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.example.dell.spotify_clone_main.adapters.ExampleAdapter;
+import com.example.dell.spotify_clone_main.adapters.RecyclerItemClickListener;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
@@ -102,6 +101,7 @@ public class SearchActivity extends AppCompatActivity implements
         recyclerViewSearch = findViewById(R.id.recyclerView);
         recyclerViewSearch.setHasFixedSize(true);
         recyclerViewSearch.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+
 
         exampleAdapter = new ExampleAdapter(this,exampleItemList);
         recyclerViewSearch.setAdapter(exampleAdapter);

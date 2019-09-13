@@ -28,8 +28,8 @@ public class SharedPrefManager {
     private static final String TOKEN = "token";
     private static SharedPrefManager mInstance;
     private static Context ctx;
-
-    private SharedPrefManager(Context context) {
+    public static String TokenMain ;
+    public SharedPrefManager(Context context) {
         ctx = context;
     }
 
@@ -42,11 +42,18 @@ public class SharedPrefManager {
 
     //this method will store the user data in shared preferences
      public void userLogin(String token) {
+        TokenMain = token;
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(TOKEN,token);
         editor.apply();
     }
+    public String loadToken(){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString(TOKEN,"");
+        return token.toString();
+    }
+
 
     //this method will checker whether user is already logged in or not
     public boolean isLoggedIn() {

@@ -1,4 +1,4 @@
-package com.example.dell.spotify_clone_main.spotify_files;
+package com.example.dell.spotify_clone_main.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
