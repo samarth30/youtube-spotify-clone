@@ -4,7 +4,7 @@ public class ExampleItem {
     private String mImageUrl;
     private String mTitle,mShortDescription;
     private int mRating,mPrice;
-    String uri;
+    String uri,id,type;
     public ExampleItem(String imageUrl, String title, int rating, int price, String shortDescription){
         mImageUrl = imageUrl;
         mTitle = title;
@@ -24,8 +24,33 @@ public class ExampleItem {
         this.uri = uri;
     }
 
+    public ExampleItem(String mImageUrl, String mTitle, String id, String type) {
+        this.mImageUrl = mImageUrl;
+        this.mTitle = mTitle;
+        this.id = id;
+        this.type = type;
+    }
+
+
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getUri() {
         return uri;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setUri(String uri) {

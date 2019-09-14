@@ -2,25 +2,19 @@ package com.example.dell.spotify_clone_main.youtube_files;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,14 +22,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dell.spotify_clone_main.R;
-import com.example.dell.spotify_clone_main.UI.Dialog;
 import com.example.dell.spotify_clone_main.UI.SharedPrefManager;
-import com.example.dell.spotify_clone_main.adapters.ExampleAdapter;
 import com.example.dell.spotify_clone_main.adapters.Playlist;
-import com.example.dell.spotify_clone_main.adapters.YoutubePlaylistRecyclerView;
-import com.example.dell.spotify_clone_main.spotify_files.ExampleItem;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.example.dell.spotify_clone_main.adapters.RecyclerItemClickListener;
+import com.example.dell.spotify_clone_main.adapters.PlaylistRecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,9 +34,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.example.dell.spotify_clone_main.UI.LoginAct.TokenFinal;
-import static com.example.dell.spotify_clone_main.UI.SharedPrefManager.TokenMain;
 
 
 public class youtube_playlist extends Fragment{
@@ -57,7 +44,7 @@ public class youtube_playlist extends Fragment{
     View view;
     Context context;
     RecyclerView youtubePlayListRecyclerView;
-    YoutubePlaylistRecyclerView adapter;
+    PlaylistRecyclerView adapter;
     ArrayList<Playlist> playlistList;
 
     public youtube_playlist() {
@@ -72,7 +59,7 @@ public class youtube_playlist extends Fragment{
 
         requestQueue = Volley.newRequestQueue(context);
         FloatingActionButton floatingActionButton = view.findViewById(R.id.fab);
-
+        FloatingActionButton search = view.findViewById(R.id.search);
         playlistList = new ArrayList<>();
 
         parseData();
@@ -80,8 +67,22 @@ public class youtube_playlist extends Fragment{
         youtubePlayListRecyclerView.setHasFixedSize(true);
         youtubePlayListRecyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
 
-        adapter = new YoutubePlaylistRecyclerView(context,playlistList);
+        adapter = new PlaylistRecyclerView(context,playlistList);
         youtubePlayListRecyclerView.setAdapter(adapter);
+
+        youtubePlayListRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Playlist currentItem = playlistList.get(position);
+                        Intent intent = new Intent(context,detailActivity.class);
+                        int id = currentItem.getId();
+                        intent.putExtra("id",id);
+                        startActivity(intent);
+
+                    }
+                })
+        );
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,20 +90,28 @@ public class youtube_playlist extends Fragment{
                 openDialog();
             }
         });
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,Search.class);
+            }
+        });
         return view;
     }
 
     private void parseData() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url1, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url1, new Response.Listener<String>() {
             @Override
             public void onResponse(String response){
                 try {
                     JSONArray jsonArray = new JSONArray(response);
+                    playlistList.clear();
                     for(int i =0;i<jsonArray.length();i++){
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         String name = jsonObject.getString("name");
                         int id = jsonObject.getInt("id");
-                        playlistList.add(new Playlist(name));
+                        playlistList.add(new Playlist(name,id));
                         adapter.notifyDataSetChanged();
                     }
 
@@ -177,7 +186,6 @@ public class youtube_playlist extends Fragment{
 
 
     public void addTexts(final String playlistname, final String password) {
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -196,7 +204,7 @@ public class youtube_playlist extends Fragment{
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(context, "this playlist already exists", Toast.LENGTH_SHORT).show();
             }
         } ){
             @Override

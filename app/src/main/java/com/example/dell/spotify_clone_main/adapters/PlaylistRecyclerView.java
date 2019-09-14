@@ -9,18 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.dell.spotify_clone_main.R;
-import com.example.dell.spotify_clone_main.spotify_files.ExampleItem;
 
 import java.util.ArrayList;
 
-public class YoutubePlaylistRecyclerView extends RecyclerView.Adapter<YoutubePlaylistRecyclerView.ExampleViewHolder> {
+public class PlaylistRecyclerView extends RecyclerView.Adapter<PlaylistRecyclerView.ExampleViewHolder> {
 
     private Context mContext;
     private ArrayList<Playlist> mExampleList;
 
-    public YoutubePlaylistRecyclerView(Context context, ArrayList<Playlist> exampleList){
+    public PlaylistRecyclerView(Context context, ArrayList<Playlist> exampleList){
         mContext = context;
         mExampleList = exampleList;
     }

@@ -1,22 +1,23 @@
 package com.example.dell.spotify_clone_main.adapters;
 
 public class Playlist {
-    String id,name;
+    String name;
+  int id;
 
-    public Playlist(String id, String name) {
-        this.id = id;
+    public Playlist(String name, int id) {
         this.name = name;
+        this.id = id;
     }
 
     public Playlist(String name) {
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

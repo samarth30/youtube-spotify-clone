@@ -43,10 +43,9 @@
             app:layout_constraintVertical_bias="0.555" />
 
         <LinearLayout
-            android:layout_width="184dp"
-            android:layout_height="62dp"
+            android:layout_width="253dp"
+            android:layout_height="63dp"
             android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="8dp"
             android:orientation="vertical"

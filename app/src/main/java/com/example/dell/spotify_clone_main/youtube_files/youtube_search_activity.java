@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.dell.spotify_clone_main.Model.Medium;
 import com.example.dell.spotify_clone_main.Model.ModelData;
+import com.example.dell.spotify_clone_main.Model.Thumbnails;
 import com.example.dell.spotify_clone_main.R;
 import com.example.dell.spotify_clone_main.service.DataAPI;
 import com.example.dell.spotify_clone_main.service.RetrofitAPI;
@@ -31,7 +33,8 @@ public class youtube_search_activity extends AppCompatActivity {
     YoutubeAdapter youtubeAdapter;
     ArrayList<Item> mangitem;
     public static String idvideo;
-
+    String title;
+    String thumbnail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +52,14 @@ public class youtube_search_activity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(youtube_search_activity.this,playvideoActivity.class);
-                startActivity(intent);
                  idvideo = mangitem.get(position).getId().getVideoId();
+                 Item currentItem = mangitem.get(position);
+                 title = currentItem.getSnippet().getTitle();
+                 thumbnail = currentItem.getSnippet().getThumbnails().getMedium().getUrl();
+                 intent.putExtra("title",title);
+                 intent.putExtra("thumbnail",thumbnail);
+                 intent.putExtra("videoId",idvideo);
+                 startActivity(intent);
             }
         });
 

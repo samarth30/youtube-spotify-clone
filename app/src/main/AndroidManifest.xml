@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dell.spotify_clone_main">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,34 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".spotify_files.rsplayer"/>
-        <activity android:name=".spotify_files.SearchActivity"/>
-        <activity android:name=".spotify_files.spotify_player_activity_main"
-            android:noHistory="true"
-            >
-
-        </activity>
-         <activity android:name=".youtube_files.youtube_search_activity"/>
-        <activity android:name=".youtube_files.playvideoActivity"/>
-        <activity android:name=".UI.LoginAct"
-
-            />
-        <activity android:name=".UI.SignUpAct"
-
-            />
-        <activity
-            android:name=".UI.spotify"
-           >
-        </activity>
-        <activity
-            android:name=".UI.youtube"
-           >
-
-        </activity>
+        <activity android:name=".youtube_files.Search"></activity>
+        <activity android:name=".youtube_files.detailActivity" />
+        <activity android:name=".spotify_files.rsplayer" />
+        <activity android:name=".spotify_files.SearchActivity" />
+        <activity android:name=".spotify_files.spotify_player_activity_main2" />
+        <activity android:name=".spotify_files.spotify_player_activity_main" />
+        <activity android:name=".youtube_files.youtube_search_activity" />
+        <activity android:name=".youtube_files.playvideoActivity" />
+        <activity android:name=".UI.LoginAct" />
+        <activity android:name=".UI.SignUpAct" />
+        <activity android:name=".UI.spotify" />
+        <activity android:name=".UI.youtube" />
         <activity android:name=".UI.Platform_choose" />
-        <activity android:name=".UI.MainActivity"
-          >
+        <activity android:name=".UI.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

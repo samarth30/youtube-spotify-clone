@@ -115,6 +115,7 @@ public class SearchActivity extends AppCompatActivity implements
                         Intent a=new Intent(SearchActivity.this,rsplayer.class);
                         a.putExtra("uri",currentItem.getUri());
                         a.putExtra("image",currentItem.getImageUrl());
+                        a.putExtra("title",currentItem.getmTitle());
                         startActivity(a);
                     }
                 })

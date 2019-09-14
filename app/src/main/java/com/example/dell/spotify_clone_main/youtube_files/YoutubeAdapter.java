@@ -47,6 +47,8 @@ public class YoutubeAdapter extends ArrayAdapter<Item> {
         viewHolder.txtTen.setText(item.getSnippet().getTitle());
         Picasso.get().load(item.getSnippet().getThumbnails().getMedium().getUrl()).into(viewHolder.imghinh);
 
+
         return convertView;
     }
+
 }
