@@ -101,7 +101,6 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
         playbackEventListener = new MyPlaybackEventListener();
 
 
-        Toast.makeText(this, "this is id " , Toast.LENGTH_SHORT).show();
         seekbar =(SeekBar) findViewById(R.id.seekBar);
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -163,6 +162,8 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
         final AlertDialog.Builder mb = new AlertDialog.Builder(this);
         final View dialog = LayoutInflater.from(this).inflate(R.layout.dialog_add_to_playlist, null, false);
 
+        mb.setView(dialog)
+                .setTitle("Add Collaboration");
         playlistList = new ArrayList<>();
         youtubePlayListRecyclerView = dialog.findViewById(R.id.playlists);
         youtubePlayListRecyclerView.setHasFixedSize(true);

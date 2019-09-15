@@ -1,10 +1,13 @@
 package com.example.dell.spotify_clone_main.youtube_files;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.android.volley.Request;
@@ -19,8 +22,9 @@ import com.example.dell.spotify_clone_main.adapters.ExampleAdapter;
 import com.example.dell.spotify_clone_main.adapters.Playlist;
 import com.example.dell.spotify_clone_main.adapters.PlaylistRecyclerView;
 import com.example.dell.spotify_clone_main.adapters.RecyclerItemClickListener;
-import com.example.dell.spotify_clone_main.spotify_files.ExampleItem;
-import com.google.gson.JsonObject;
+import com.example.dell.spotify_clone_main.adapters.ExampleItem;
+import com.example.dell.spotify_clone_main.adapters.viewCollab;
+import com.example.dell.spotify_clone_main.adapters.viewCollabAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +40,12 @@ public class detailActivity extends AppCompatActivity {
     ExampleAdapter adapter;
     ArrayList<ExampleItem> playlistList;
     String playlist_detail = "https://aasthamalik31.pythonanywhere.com/playlist/playlist_detail/";
+    String view_collab = "https://aasthamalik31.pythonanywhere.com/playlist/view_collab/";
     int id;
+
+    ArrayList<viewCollab> viewcollabList;
+    viewCollabAdapter ViewCollabAdapter;
+    RecyclerView viewCollabRecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +95,76 @@ public class detailActivity extends AppCompatActivity {
                 })
         );
 
+        FloatingActionButton viewcollab = findViewById(R.id.viewCollab);
+        viewcollab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialogCollabView();
+            }
+        });
+
+    }
+
+    private void openDialogCollabView() {
+        final AlertDialog.Builder mb = new AlertDialog.Builder(this);
+        final View dialog = LayoutInflater.from(this).inflate(R.layout.view_collab, null, false);
+
+        mb.setView(dialog)
+                .setTitle("View Collaboration");
+        viewcollabList = new ArrayList<>();
+        viewCollabRecyclerView = dialog.findViewById(R.id.view_collaborations);
+        viewCollabRecyclerView.setHasFixedSize(true);
+        viewCollabRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        parseCollaborations();
+        ViewCollabAdapter = new viewCollabAdapter(this,viewcollabList);
+        viewCollabRecyclerView.setAdapter(ViewCollabAdapter);
+
+        mb.setView(dialog);
+        final AlertDialog ass = mb.create();
+
+        ass.show();
+
+    }
+
+    private void parseCollaborations() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, view_collab, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response){
+                try {
+                    viewcollabList.clear();
+                    JSONArray jsonArray = new JSONArray(response);
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String email = jsonObject.getString("email");
+
+                        viewcollabList.add(new viewCollab(email));
+                        ViewCollabAdapter.notifyDataSetChanged();
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                SharedPrefManager sharedPrefManager = new SharedPrefManager(detailActivity.this);
+                String token = sharedPrefManager.loadToken();
+                params.put("token",token);
+                params.put("playlist_id", String.valueOf(id));
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
     private void parseData() {

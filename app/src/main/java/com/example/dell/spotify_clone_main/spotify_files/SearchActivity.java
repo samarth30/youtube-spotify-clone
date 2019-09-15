@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dell.spotify_clone_main.R;
 import com.example.dell.spotify_clone_main.adapters.ExampleAdapter;
+import com.example.dell.spotify_clone_main.adapters.ExampleItem;
 import com.example.dell.spotify_clone_main.adapters.RecyclerItemClickListener;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;

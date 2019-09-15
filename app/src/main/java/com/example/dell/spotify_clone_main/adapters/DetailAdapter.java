@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.dell.spotify_clone_main.R;
-import com.example.dell.spotify_clone_main.spotify_files.ExampleItem;
 
 import java.util.ArrayList;
 

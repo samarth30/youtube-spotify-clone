@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/playlists"
+        android:id="@+id/view_collaborations"
         android:layout_width="350dp"
         android:layout_height="350dp" />
 </LinearLayout>

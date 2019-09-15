@@ -95,6 +95,7 @@ public class youtube_playlist extends Fragment{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,Search.class);
+                startActivity(intent);
             }
         });
         return view;

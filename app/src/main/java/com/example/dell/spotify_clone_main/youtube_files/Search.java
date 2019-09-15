@@ -1,15 +1,19 @@
 package com.example.dell.spotify_clone_main.youtube_files;
 
-import android.content.Intent;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,9 +24,8 @@ import com.example.dell.spotify_clone_main.R;
 import com.example.dell.spotify_clone_main.UI.SharedPrefManager;
 import com.example.dell.spotify_clone_main.adapters.ExampleAdapter;
 import com.example.dell.spotify_clone_main.adapters.RecyclerItemClickListener;
-import com.example.dell.spotify_clone_main.spotify_files.ExampleItem;
-import com.example.dell.spotify_clone_main.spotify_files.SearchActivity;
-import com.example.dell.spotify_clone_main.spotify_files.rsplayer;
+import com.example.dell.spotify_clone_main.adapters.ExampleItem;
+import com.example.dell.spotify_clone_main.adapters.SearchAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,11 +36,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Search extends AppCompatActivity {
-    String key;
+    String key="s";
     String url = "https://aasthamalik31.pythonanywhere.com/playlist/search_playlist/";
+    String addCollab = "https://aasthamalik31.pythonanywhere.com/playlist/add_collab/";
     Button searchButton;
     ArrayList<ExampleItem> exampleItemList;
-    ExampleAdapter exampleAdapter;
+    SearchAdapter exampleAdapter;
     EditText searchText;
     RecyclerView recyclerViewSearch;
 
@@ -52,37 +56,122 @@ public class Search extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 key = searchText.getText().toString();
-                parseData();
+                parseData(key);
             }
         });
         exampleItemList = new ArrayList<>();
-
 
         recyclerViewSearch = findViewById(R.id.recyclerView);
         recyclerViewSearch.setHasFixedSize(true);
         recyclerViewSearch.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
 
-        exampleAdapter = new ExampleAdapter(this,exampleItemList);
+        exampleAdapter = new SearchAdapter(this,exampleItemList);
         recyclerViewSearch.setAdapter(exampleAdapter);
 
         recyclerViewSearch.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-//                        ExampleItem currentItem = exampleItemList.get(position);
-//
-//                        Intent a=new Intent(Search.this, rsplayer.class);
-//                        a.putExtra("uri",currentItem.getUri());
-//                        a.putExtra("image",currentItem.getImageUrl());
-//                        a.putExtra("title",currentItem.getmTitle());
-//                        startActivity(a);
+                        ExampleItem currentItem = exampleItemList.get(position);
+                        String id = currentItem.getPlaylistID();
+                        openDialog(id);
                     }
                 })
         );
     }
 
-    private void parseData() {
+    private void openDialog(final String id) {
+//        Dialog dialog = new Dialog();
+//        dialog.show(getFragmentManager(),"dialog");
+        final AlertDialog.Builder mb = new AlertDialog.Builder(this);
+        final View dialog = LayoutInflater.from(this).inflate(R.layout.dialogcollab, null, false);
+
+        final EditText PlaylistPassword = dialog.findViewById(R.id.password);
+
+
+
+        mb.setView(dialog)
+                .setTitle("Add Collaboration")
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String password = PlaylistPassword.getText().toString();
+                        if (TextUtils.isEmpty(password)) {
+                            Toast.makeText(Search.this, "please enter something in password", Toast.LENGTH_SHORT).show();
+                        } else {
+                            AddCollab(id, password);
+                        }
+                    }
+                });
+
+
+//        final Button ok = dialog.findViewById(R.id.ok);
+//        ok.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String playlistname = playlistName.getText().toString();
+//                String password = PlaylistPassword.getText().toString();
+//                addTexts(playlistname,password);
+//            }
+//        });
+
+        mb.setView(dialog);
+        final AlertDialog ass = mb.create();
+
+        ass.show();
+    }
+
+    private void AddCollab(final String id,final String password) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, addCollab, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                  JSONObject jsonObject = new JSONObject(response);
+                  Boolean collab = jsonObject.getBoolean("Collab Created");
+
+                  if(collab){
+                      Toast.makeText(Search.this, "Collaboration done succesfully now this is your playlist", Toast.LENGTH_SHORT).show();
+                  }else{
+                      Toast.makeText(Search.this, "please enter the correct password", Toast.LENGTH_SHORT).show();
+                  }
+
+                } catch (JSONException e) {
+                    Toast.makeText(Search.this, "you cannot add collab to your playlist" , Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Search.this, "something went wrong either you have entered collab to your playlist or there some internet connection error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String,String> params = new HashMap<>();
+                SharedPrefManager sharedPrefManager = new SharedPrefManager(Search.this);
+                String token = sharedPrefManager.loadToken();
+
+                params.put("token",token);
+                params.put("playlist_id",id);
+                params.put("password",password);
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void parseData(final String key) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -93,8 +182,9 @@ public class Search extends AppCompatActivity {
                     for(int i =0;i<jsonArray.length();i++){
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         String name = jsonObject.getString("name");
+                        String id = jsonObject.getString("id");
 
-                        exampleItemList.add(new ExampleItem(name));
+                        exampleItemList.add(new ExampleItem(name,id));
                         exampleAdapter.notifyDataSetChanged();
                     }
 
@@ -119,7 +209,6 @@ public class Search extends AppCompatActivity {
 
                 params.put("token",token);
                 params.put("search_term",key);
-                params.put("password","");
 
                 return params;
             }

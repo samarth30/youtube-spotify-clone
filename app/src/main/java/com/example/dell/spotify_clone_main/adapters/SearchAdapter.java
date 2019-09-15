@@ -14,12 +14,12 @@ import com.example.dell.spotify_clone_main.R;
 
 import java.util.ArrayList;
 
-public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleViewHolder> {
 
     private Context mContext;
     private ArrayList<ExampleItem> mExampleList;
 
-    public ExampleAdapter(Context context,ArrayList<ExampleItem> exampleList){
+    public SearchAdapter(Context context, ArrayList<ExampleItem> exampleList){
         mContext = context;
         mExampleList = exampleList;
     }
@@ -35,12 +35,11 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
         ExampleItem currentItem = mExampleList.get(position);
-        String imageUrl = currentItem.getImageUrl();
         String title = currentItem.getmTitle();
-        String uri = currentItem.getUri();
+        String id = currentItem.getPlaylistID();
 
         holder.mTextViewTitle.setText(title);
-        Glide.with(mContext).load(imageUrl).into(holder.mImageView);
+
 
 
     }

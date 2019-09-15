@@ -1,10 +1,13 @@
-package com.example.dell.spotify_clone_main.spotify_files;
+package com.example.dell.spotify_clone_main.adapters;
 
 public class ExampleItem {
     private String mImageUrl;
     private String mTitle,mShortDescription;
     private int mRating,mPrice;
     String uri,id,type;
+
+    String playlistID;
+
     public ExampleItem(String imageUrl, String title, int rating, int price, String shortDescription){
         mImageUrl = imageUrl;
         mTitle = title;
@@ -13,9 +16,9 @@ public class ExampleItem {
         mShortDescription = shortDescription;
     }
 
-    public ExampleItem(String mTitle, String uri) {
+    public ExampleItem(String mTitle, String playlistID) {
         this.mTitle = mTitle;
-        this.uri = uri;
+        this.playlistID = playlistID;
     }
 
     public ExampleItem(String mImageUrl, String mTitle, String uri) {
@@ -31,7 +34,17 @@ public class ExampleItem {
         this.type = type;
     }
 
+    public ExampleItem(String mTitle) {
+        this.mTitle = mTitle;
+    }
 
+    public String getPlaylistID() {
+        return playlistID;
+    }
+
+    public void setPlaylistID(String playlistID) {
+        this.playlistID = playlistID;
+    }
 
     public String getType() {
         return type;
@@ -65,9 +78,7 @@ public class ExampleItem {
         this.mImageUrl = mImageUrl;
     }
 
-    public ExampleItem(String mImageUrl) {
-        this.mImageUrl = mImageUrl;
-    }
+
 
     public String getImageUrl(){
         return  mImageUrl;

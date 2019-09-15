@@ -9,17 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.dell.spotify_clone_main.R;
 
 import java.util.ArrayList;
 
-public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder> {
+public class viewCollabAdapter extends RecyclerView.Adapter<viewCollabAdapter.ExampleViewHolder> {
 
     private Context mContext;
-    private ArrayList<ExampleItem> mExampleList;
+    private ArrayList<viewCollab> mExampleList;
 
-    public ExampleAdapter(Context context,ArrayList<ExampleItem> exampleList){
+    public viewCollabAdapter(Context context, ArrayList<viewCollab> exampleList){
         mContext = context;
         mExampleList = exampleList;
     }
@@ -34,13 +33,13 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
-        ExampleItem currentItem = mExampleList.get(position);
-        String imageUrl = currentItem.getImageUrl();
-        String title = currentItem.getmTitle();
-        String uri = currentItem.getUri();
+        viewCollab currentItem = mExampleList.get(position);
+//        String imageUrl = currentItem.getImageUrl();
+        String email = currentItem.getEmail();
 
-        holder.mTextViewTitle.setText(title);
-        Glide.with(mContext).load(imageUrl).into(holder.mImageView);
+
+        holder.mTextViewTitle.setText(email);
+//        Glide.with(mContext).load(imageUrl).into(holder.mImageView);
 
 
     }
