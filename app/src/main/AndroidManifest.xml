@@ -14,6 +14,7 @@
         <activity android:name=".youtube_files.Search"></activity>
         <activity android:name=".youtube_files.detailActivity" />
         <activity android:name=".spotify_files.rsplayer" />
+        <activity android:name=".spotify_files.SearchActivity2"/>
         <activity android:name=".spotify_files.SearchActivity" />
         <activity android:name=".spotify_files.spotify_player_activity_main2" />
         <activity android:name=".spotify_files.spotify_player_activity_main" />

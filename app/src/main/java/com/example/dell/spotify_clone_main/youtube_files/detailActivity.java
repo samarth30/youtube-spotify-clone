@@ -81,7 +81,7 @@ public class detailActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else if(type.equals("spotify")){
-                            Intent intent = new Intent(detailActivity.this,com.example.dell.spotify_clone_main.spotify_files.rsplayer.class);
+                            Intent intent = new Intent(detailActivity.this,com.example.dell.spotify_clone_main.spotify_files.spotify_player_activity_main2.class);
                             String songid = currentItem.getId();
                             String name = currentItem.getmTitle();
                             String image = currentItem.getImageUrl();

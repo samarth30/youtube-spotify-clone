@@ -86,13 +86,13 @@ public class spotify_player_activity_main2 extends Activity implements
                         mPlayer = spotifyPlayer;
                         mPlayer.addConnectionStateCallback(spotify_player_activity_main2.this);
                         mPlayer.addNotificationCallback(spotify_player_activity_main2.this);
-//                        Intent intent1 = new Intent(spotify_player_activity_main2.this,rsplayer.class);
-//                        intent1.putExtra("token",response.getAccessToken());
-//                        intent1.putExtra("uri",uri);
-//                        intent1.putExtra("title",title);
-//                        intent1.putExtra("image",image);
-//
-//                        startActivity(intent1);
+                        Intent intent1 = new Intent(spotify_player_activity_main2.this,SearchActivity2.class);
+                        intent1.putExtra("token",response.getAccessToken());
+                        intent1.putExtra("uri",uri);
+                        intent1.putExtra("title",title);
+                        intent1.putExtra("image",image);
+
+                        startActivity(intent1);
 
                     }
 
