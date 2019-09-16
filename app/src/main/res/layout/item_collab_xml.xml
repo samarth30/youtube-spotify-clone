@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_marginTop="2dp"
+    android:background="@android:color/black"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    app:layout_goneMarginLeft="8dp"
+    tools:layout_editor_absoluteX="8dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="385dp"
+        android:layout_height="83dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="253dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <TextView
+                android:id="@+id/textViewtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dutch"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                tools:layout_editor_absoluteX="157dp"
+                tools:layout_editor_absoluteY="40dp" />
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

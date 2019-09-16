@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.dell.spotify_clone_main.R;
 
 import java.util.ArrayList;
-
+// detial class adapter
 public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ExampleViewHolder> {
 
     private Context mContext;

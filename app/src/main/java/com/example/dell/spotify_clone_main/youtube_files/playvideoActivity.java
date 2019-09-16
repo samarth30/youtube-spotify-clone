@@ -1,6 +1,8 @@
 package com.example.dell.spotify_clone_main.youtube_files;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -39,6 +43,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+// youtube player
+
 public class playvideoActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener{
     int REQUEST_VIDEO = 123;
     YouTubePlayerView youTubePlayerView;
@@ -63,6 +69,10 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
 
     String title,thumbnail;
     String idvideo;
+    ImageView heart,forward,rewind,shuffle,repeatone;
+
+    ProgressBar progressBar;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +84,17 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
         thumbnail = getIntent().getExtras().getString("thumbnail");
         idvideo = getIntent().getExtras().getString("videoId");
 
+        heart = findViewById(R.id.heart);
+        forward = findViewById(R.id.fastforward);
+        rewind = findViewById(R.id.fastrewind);
+        shuffle = findViewById(R.id.shuffle);
+        repeatone = findViewById(R.id.repeatonce);
+
+        heart.setBackground(getDrawable(R.drawable.ic_favorite_border_black_24dp));
+        forward.setBackground(getDrawable(R.drawable.ic_fast_forward_black_24dp));
+        rewind.setBackground(getDrawable(R.drawable.ic_fast_rewind_black_24dp));
+        shuffle.setBackground(getDrawable(R.drawable.ic_shuffle_black_24dp));
+        repeatone.setBackground(getDrawable(R.drawable.ic_repeat_one_black_24dp));
 
         handler = new Handler();
         my=new Runnable() {
@@ -127,6 +148,8 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
 
             }
         });
+        seekbar.getProgressDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        seekbar.getThumb().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         final Button Play_Pause =(Button) findViewById(R.id.button2);
         Play_Pause.setOnClickListener(new View.OnClickListener() {
@@ -157,15 +180,15 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
 
 
     }
-
+// add video to playlist
     private void dialog() {
         final AlertDialog.Builder mb = new AlertDialog.Builder(this);
         final View dialog = LayoutInflater.from(this).inflate(R.layout.dialog_add_to_playlist, null, false);
 
-        mb.setView(dialog)
-                .setTitle("Add Collaboration");
         playlistList = new ArrayList<>();
         youtubePlayListRecyclerView = dialog.findViewById(R.id.playlists);
+        progressBar = dialog.findViewById(R.id.progressbarPlayList);
+        progressBar.setVisibility(View.VISIBLE);
         youtubePlayListRecyclerView.setHasFixedSize(true);
         youtubePlayListRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         parseData();
@@ -190,7 +213,7 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
 
         ass.show();
     }
-
+// add video to server
     private void AddThisToPlaylist(final String videoId, final int id,final String title,final String thumbnail) {
     StringRequest stringRequest = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
         @Override
@@ -204,14 +227,14 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
                     Toast.makeText(playvideoActivity.this, "track succesfully added", Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
-                e.printStackTrace();
+                Toast.makeText(playvideoActivity.this, "you cannot add same track to this playlist", Toast.LENGTH_SHORT).show();
             }
 
         }
     }, new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            Toast.makeText(playvideoActivity.this, "Error" + error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(playvideoActivity.this, "you cannot add same track to this playlist", Toast.LENGTH_SHORT).show();
         }
     })
 
@@ -235,6 +258,7 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
     requestQueue.add(stringRequest);
     }
 
+    // parse data to recycler view
     private void parseData() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url1, new Response.Listener<String>() {
             @Override
@@ -249,7 +273,7 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
                         playlistList.add(new Playlist(name,id));
                         adapter.notifyDataSetChanged();
                     }
-
+                   progressBar.setVisibility(View.GONE);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -273,6 +297,8 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
+    // youtube functions
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.dell.spotify_clone_main.R;
 
 import java.util.ArrayList;
-
+// playlist recycler view adapter
 public class PlaylistRecyclerView extends RecyclerView.Adapter<PlaylistRecyclerView.ExampleViewHolder> {
 
     private Context mContext;

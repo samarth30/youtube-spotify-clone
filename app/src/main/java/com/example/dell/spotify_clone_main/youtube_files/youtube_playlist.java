@@ -9,10 +9,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,7 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
+// youtube playlist fragment
 public class youtube_playlist extends Fragment{
 
     RequestQueue requestQueue;
@@ -46,9 +48,9 @@ public class youtube_playlist extends Fragment{
     RecyclerView youtubePlayListRecyclerView;
     PlaylistRecyclerView adapter;
     ArrayList<Playlist> playlistList;
-
+    ProgressBar progressBar;
     public youtube_playlist() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -56,7 +58,8 @@ public class youtube_playlist extends Fragment{
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_youtube_playlist, container, false);
         context = view.getContext();
-
+        progressBar = view.findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
         requestQueue = Volley.newRequestQueue(context);
         FloatingActionButton floatingActionButton = view.findViewById(R.id.fab);
         FloatingActionButton search = view.findViewById(R.id.search);
@@ -101,7 +104,10 @@ public class youtube_playlist extends Fragment{
         return view;
     }
 
+    // parsing data to recycler view
+
     private void parseData() {
+        progressBar.setVisibility(view.VISIBLE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url1, new Response.Listener<String>() {
             @Override
             public void onResponse(String response){
@@ -115,6 +121,7 @@ public class youtube_playlist extends Fragment{
                         playlistList.add(new Playlist(name,id));
                         adapter.notifyDataSetChanged();
                     }
+                    progressBar.setVisibility(View.GONE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -139,7 +146,7 @@ public class youtube_playlist extends Fragment{
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }
-
+   // dialog to add playlist
     private void openDialog() {
 //        Dialog dialog = new Dialog();
 //        dialog.show(getFragmentManager(),"dialog");
@@ -152,7 +159,7 @@ public class youtube_playlist extends Fragment{
 
 
         mb.setView(dialog)
-                .setTitle("login")
+                .setTitle("Create New Playlist")
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -164,20 +171,18 @@ public class youtube_playlist extends Fragment{
                     public void onClick(DialogInterface dialog, int which) {
                         String playlistname = playlistName.getText().toString();
                         String password = PlaylistPassword.getText().toString();
-                        addTexts(playlistname,password);
+
+                        if (TextUtils.isEmpty(playlistname)) {
+                            Toast.makeText(context, "please give playlist some name", Toast.LENGTH_SHORT).show();
+                        } else if (TextUtils.isEmpty(password)) {
+                            Toast.makeText(context, "please enter playlist a password", Toast.LENGTH_SHORT).show();
+                        } else {
+                            addTexts(playlistname, password);
+                        }
                     }
                 });
 
 
-//        final Button ok = dialog.findViewById(R.id.ok);
-//        ok.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String playlistname = playlistName.getText().toString();
-//                String password = PlaylistPassword.getText().toString();
-//                addTexts(playlistname,password);
-//            }
-//        });
 
         mb.setView(dialog);
         final AlertDialog ass = mb.create();
@@ -185,7 +190,7 @@ public class youtube_playlist extends Fragment{
         ass.show();
     }
 
-
+    //  add text to server
     public void addTexts(final String playlistname, final String password) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -200,6 +205,7 @@ public class youtube_playlist extends Fragment{
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(context, "you cannot create playlist of same name again", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {

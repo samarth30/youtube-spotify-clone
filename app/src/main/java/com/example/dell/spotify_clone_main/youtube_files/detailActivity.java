@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,7 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+// detail page activity opened in playlist viewer
 public class detailActivity extends AppCompatActivity {
 
     RecyclerView PlayListRecyclerView;
@@ -46,12 +47,16 @@ public class detailActivity extends AppCompatActivity {
     ArrayList<viewCollab> viewcollabList;
     viewCollabAdapter ViewCollabAdapter;
     RecyclerView viewCollabRecyclerView;
+
+    ProgressBar progressBar;
+    ProgressBar progressBarViewCollab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         id = getIntent().getExtras().getInt("id");
-
+        progressBar = findViewById(R.id.progressbardetail);
+        progressBar.setVisibility(View.VISIBLE);
         playlistList = new ArrayList<>();
 
         parseData();
@@ -104,15 +109,16 @@ public class detailActivity extends AppCompatActivity {
         });
 
     }
-
+    // dialog to see collaborations
     private void openDialogCollabView() {
         final AlertDialog.Builder mb = new AlertDialog.Builder(this);
         final View dialog = LayoutInflater.from(this).inflate(R.layout.view_collab, null, false);
 
-        mb.setView(dialog)
-                .setTitle("View Collaboration");
+
         viewcollabList = new ArrayList<>();
         viewCollabRecyclerView = dialog.findViewById(R.id.view_collaborations);
+        progressBarViewCollab = dialog.findViewById(R.id.progressbarViewCollab);
+        progressBarViewCollab.setVisibility(View.VISIBLE);
         viewCollabRecyclerView.setHasFixedSize(true);
         viewCollabRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         parseCollaborations();
@@ -126,6 +132,7 @@ public class detailActivity extends AppCompatActivity {
 
     }
 
+    // add collaborations to recycler view
     private void parseCollaborations() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, view_collab, new Response.Listener<String>() {
             @Override
@@ -140,7 +147,7 @@ public class detailActivity extends AppCompatActivity {
                         viewcollabList.add(new viewCollab(email));
                         ViewCollabAdapter.notifyDataSetChanged();
                     }
-
+                 progressBarViewCollab.setVisibility(View.GONE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -167,7 +174,9 @@ public class detailActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    // add videos and songs to your playlist recycler view
     private void parseData() {
+        progressBar.setVisibility(View.VISIBLE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, playlist_detail, new Response.Listener<String>() {
             @Override
             public void onResponse(String response){
@@ -183,7 +192,7 @@ public class detailActivity extends AppCompatActivity {
                         playlistList.add(new ExampleItem(image,name,track_id,type));
                         adapter.notifyDataSetChanged();
                     }
-
+                progressBar.setVisibility(View.GONE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -25,7 +25,7 @@ import com.spotify.sdk.android.player.Spotify;
 import com.spotify.sdk.android.player.SpotifyPlayer;
 
 import java.util.ArrayList;
-
+// spotify login activity
 public class spotify_player_activity_main extends Activity implements
         SpotifyPlayer.NotificationCallback, ConnectionStateCallback
 {
@@ -63,7 +63,7 @@ public class spotify_player_activity_main extends Activity implements
 
     }
 
-
+ // spotify functions
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent intent) {

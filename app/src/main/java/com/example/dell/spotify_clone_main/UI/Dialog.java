@@ -13,7 +13,7 @@ import android.widget.EditText;
 import com.example.dell.spotify_clone_main.R;
 
 import java.util.Objects;
-
+// dialog  activity
 public class Dialog extends AppCompatDialogFragment {
 
     private EditText playlistName,PlaylistPassword;

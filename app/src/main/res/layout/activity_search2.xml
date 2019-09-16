@@ -53,7 +53,7 @@
                 android:layout_marginTop="1dp"
                 android:layout_toRightOf="@+id/ic_magnify"
                 android:background="@null"
-                android:hint="Enter song you want to listen"
+                android:hint="Enter the name of playlist"
                 android:textColorHint="@android:color/black"
                 android:textColor="#000"
                 android:textSize="16sp" />
@@ -75,13 +75,27 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/linearlayout"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="11dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/progressbarSearch"
+        android:layout_width="153dp"
+        android:layout_height="140dp"
+        android:visibility="gone"
+        android:layout_alignStart="@+id/recyclerView"
+        android:layout_alignTop="@+id/recyclerView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="211dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginBottom="380dp" />
 </RelativeLayout>

@@ -7,13 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.dell.spotify_clone_main.R;
+import com.example.dell.spotify_clone_main.UI.SharedPrefManager;
 
-
+// yotube user
 
 public class youtube_user extends Fragment {
-
+    View view;
+    Context context;
     public youtube_user() {
         // Required empty public constructor
     }
@@ -22,7 +25,12 @@ public class youtube_user extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_youtube_user, container, false);
-
+         view = inflater.inflate(R.layout.fragment_youtube_user, container, false);
+        context = view.getContext();
+        SharedPrefManager sharedPrefManager = new SharedPrefManager(context);
+        String email = sharedPrefManager.loadEmail();
+        TextView textView = view.findViewById(R.id.textviewuser);
+        textView.setText(email);
+        return  view;
     }
 }

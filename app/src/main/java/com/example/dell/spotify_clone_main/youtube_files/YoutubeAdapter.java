@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// yourube list view adapter
 public class YoutubeAdapter extends ArrayAdapter<Item> {
     public YoutubeAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Item> objects) {
         super(context, resource, objects);

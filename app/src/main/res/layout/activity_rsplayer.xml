@@ -45,21 +45,21 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="90dp"
+        android:layout_width="73dp"
+        android:layout_height="73dp"
         android:layout_above="@+id/seekBar"
         android:layout_below="@+id/imageRsplayer"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/ic_pause_circle_filled_black_24dp"
         android:textColor="@android:color/white"
         android:textSize="30dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="NotSibling" />
 
@@ -76,20 +76,76 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/white"
+        android:background="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/addToPlayList"
-        android:layout_width="86dp"
-        android:layout_height="89dp"
+
+    <ImageView
+        android:id="@+id/heart"
+        android:layout_width="23dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_favorite_border_black_24dp" />
+
+    <ImageView
+        android:id="@+id/fastforward"
+        android:layout_width="46dp"
+        android:layout_height="31dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/ic_add_circle_black_24dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:srcCompat="@drawable/ic_fast_forward_black_24dp" />
+
+    <ImageView
+        android:id="@+id/fastrewind"
+        android:layout_width="45dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.772"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_fast_rewind_black_24dp" />
+
+    <ImageView
+        android:id="@+id/shuffle"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_shuffle_black_24dp" />
+
+    <ImageView
+        android:id="@+id/repeatonce"
+        android:layout_width="32dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_repeat_one_black_24dp" />
+
+    <Button
+        android:id="@+id/addToPlayList"
+        android:layout_width="23dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/ic_playlist_add_black_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.853"
         app:layout_constraintStart_toEndOf="@+id/button2" />
 </android.support.constraint.ConstraintLayout>

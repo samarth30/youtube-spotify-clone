@@ -13,7 +13,8 @@ import com.example.dell.spotify_clone_main.R;
 import com.example.dell.spotify_clone_main.spotify_files.spotify_playlist;
 import com.example.dell.spotify_clone_main.spotify_files.spotify_search;
 import com.example.dell.spotify_clone_main.spotify_files.spotify_user;
-
+import com.example.dell.spotify_clone_main.youtube_files.youtube_playlist;
+// spotify main class
 public class spotify extends AppCompatActivity {
 
     FrameLayout mMainFrame;
@@ -21,7 +22,7 @@ public class spotify extends AppCompatActivity {
     spotify_playlist spotify_playlist;
     spotify_search spotify_search;
     spotify_user spotify_user;
-
+    youtube_playlist youtube_playlist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.dell.spotify_clone_main.R;
 
 import java.util.ArrayList;
-
+// search adapter for spotify
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ExampleViewHolder> {
 
     private Context mContext;

@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.dell.spotify_clone_main.Model.Medium;
 import com.example.dell.spotify_clone_main.Model.ModelData;
@@ -35,14 +36,18 @@ public class youtube_search_activity extends AppCompatActivity {
     public static String idvideo;
     String title;
     String thumbnail;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
+        progressBar = findViewById(R.id.progressbaryoutube);
         Anhxa();
         btnsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                listView.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
                 String tukhoa = edtsearch.getText().toString();
                 tukhoa =tukhoa.replace(" ","%20");
                 Docdulieu(tukhoa);
@@ -66,7 +71,9 @@ public class youtube_search_activity extends AppCompatActivity {
 
     }
 
+    // parse data from youtube api to list view
     public void Docdulieu(String tukhoa) {
+        progressBar.setVisibility(View.VISIBLE);
         DataAPI dataAPI = RetrofitAPI.getdata();
         Call<ModelData> callback = dataAPI.getResurt("snippet", tukhoa, "50", "video", "AIzaSyCGRsTeKpXw89plhwXNFvkUCzrNzm8jw78");
         callback.enqueue(new Callback<ModelData>() {
@@ -76,14 +83,16 @@ public class youtube_search_activity extends AppCompatActivity {
                 mangitem = (ArrayList<Item>) modelData.getItems();
                 youtubeAdapter = new YoutubeAdapter(youtube_search_activity.this, android.R.layout.simple_list_item_1, mangitem);
                 listView.setAdapter(youtubeAdapter);
+                progressBar.setVisibility(View.GONE);
+                listView.setVisibility(View.VISIBLE);
                 Log.d("bbb", modelData.getItems().get(0).getSnippet().getTitle());
             }
-
             @Override
             public void onFailure(Call<ModelData> call, Throwable t) {
 
             }
         });
+
     }
 
     private void Anhxa() {

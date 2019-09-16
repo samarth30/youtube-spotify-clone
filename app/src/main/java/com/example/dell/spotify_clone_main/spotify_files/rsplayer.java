@@ -1,6 +1,9 @@
+// spotify player
 package com.example.dell.spotify_clone_main.spotify_files;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,6 +30,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.crystal.crystalrangeseekbar.widgets.BubbleThumbRangeSeekbar;
 import com.example.dell.spotify_clone_main.R;
 import com.example.dell.spotify_clone_main.UI.SharedPrefManager;
 import com.example.dell.spotify_clone_main.adapters.ExampleAdapter;
@@ -92,12 +96,14 @@ public class rsplayer extends AppCompatActivity implements
     Button addToPlayList;
 
 
+
     RecyclerView youtubePlayListRecyclerView;
     PlaylistRecyclerView adapter;
     ArrayList<Playlist> playlistList;
 
     String myPlaylist= "https://aasthamalik31.pythonanywhere.com/playlist/my_playlists/";
     String addtrak = "https://aasthamalik31.pythonanywhere.com/playlist/add_trak_to_playlist/";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +147,6 @@ public class rsplayer extends AppCompatActivity implements
             }
         });
 
-
         seekbar =(SeekBar) findViewById(R.id.seekBar);
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -174,7 +179,8 @@ public class rsplayer extends AppCompatActivity implements
 
             }
         });
-
+        seekbar.getProgressDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        seekbar.getThumb().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         addToPlayList = findViewById(R.id.addToPlayList);
         addToPlayList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,7 +190,7 @@ public class rsplayer extends AppCompatActivity implements
             }
         });
     }
-
+    // dialog add to playlist
     private void dialog() {
         final AlertDialog.Builder mb = new AlertDialog.Builder(this);
         final View dialog = LayoutInflater.from(this).inflate(R.layout.dialog_add_to_playlist, null, false);
@@ -215,7 +221,7 @@ public class rsplayer extends AppCompatActivity implements
         ass.show();
     }
 
-
+    // add song to server
     private void AddThisToPlaylist( final int id,final String title,final String thumbnail) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, addtrak, new Response.Listener<String>() {
             @Override
@@ -259,6 +265,7 @@ public class rsplayer extends AppCompatActivity implements
         requestQueue.add(stringRequest);
     }
 
+    // parse the playlists to recycler view
     private void parseData() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, myPlaylist, new Response.Listener<String>() {
             @Override
@@ -297,7 +304,7 @@ public class rsplayer extends AppCompatActivity implements
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-
+// spotify fucntions
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent intent) {

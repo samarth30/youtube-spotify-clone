@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.dell.spotify_clone_main.R;
-
+// first page
 public class MainActivity extends AppCompatActivity {
 
     TextView app_title;

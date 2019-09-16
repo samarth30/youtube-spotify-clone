@@ -1,5 +1,5 @@
 package com.example.dell.spotify_clone_main.adapters;
-
+// example item class
 public class ExampleItem {
     private String mImageUrl;
     private String mTitle,mShortDescription;

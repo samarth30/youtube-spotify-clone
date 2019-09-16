@@ -31,6 +31,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+// login activity
+
 public class LoginAct extends AppCompatActivity {
 
     Animation frombottom, fromtop;
@@ -88,7 +90,7 @@ public class LoginAct extends AppCompatActivity {
             }
         });
     }
-
+// login fucntion
     private void login() {
         String email = email_login.getText().toString().trim();
         String password = password_login.getText().toString().trim();
@@ -96,10 +98,10 @@ public class LoginAct extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
 
         if (imm.isAcceptingText()) {
-//            writeToLog("Software Keyboard was shown");
+
             hideSoftKeyboard(LoginAct.this);
         } else {
-//            writeToLog("Software Keyboard was not shown");
+
         }
 
 
@@ -115,12 +117,11 @@ public class LoginAct extends AppCompatActivity {
             loading.setVisibility(View.VISIBLE);
 
             AllowAcessToAccount(email, password);
-//        tokenSaved();
         }
 
     }
 
-
+// checking the login through server
     private void AllowAcessToAccount(final String email, final String password) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
@@ -134,7 +135,8 @@ public class LoginAct extends AppCompatActivity {
                     if (Logged) {
                         String token = jsonObject.getString("token");
                         TokenFinal = token;
-                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(token);
+                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(token,email);
+
                         loading.setVisibility(View.GONE);
                         btnLogin_login.setVisibility(View.VISIBLE);
                         startActivity(new Intent(LoginAct.this, Platform_choose.class));
@@ -181,17 +183,6 @@ public class LoginAct extends AppCompatActivity {
                 activity.getCurrentFocus().getWindowToken(), 0);
     }
 
-//    @Override
-//    public void onBackPressed() {
-//
-//
-//        finish();
-//        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-//        homeIntent.addCategory(Intent.CATEGORY_HOME);
-//        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(homeIntent);
-//
-//
-//    }
+
 
 }

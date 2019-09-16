@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -40,7 +41,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+// search activity search songs
 public class SearchActivity extends AppCompatActivity implements
         SpotifyPlayer.NotificationCallback, ConnectionStateCallback
 {
@@ -67,12 +68,12 @@ public class SearchActivity extends AppCompatActivity implements
     RecyclerView recyclerViewSearch;
 
     String AcessToken;
-
-    @Override
+    ProgressBar progressBar;
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
+        progressBar = findViewById(R.id.progressspotify);
 
         final AuthenticationRequest.Builder builder = new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
 //        builder.setScopes(new String[]{"user-read-private", "streaming"});
@@ -90,6 +91,8 @@ public class SearchActivity extends AppCompatActivity implements
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                recyclerViewSearch.setVisibility(View.GONE);
                 key = searchText.getText().toString();
                 url = "https://api.spotify.com/v1/search?q="+key+"&type=track&market=US&limit=10&offset=5";
                 parseData();
@@ -122,7 +125,7 @@ public class SearchActivity extends AppCompatActivity implements
                 })
         );
     }
-
+  /// search songs and parse to the recycler view
     private void parseData() {
 
         requestQueue = Volley.newRequestQueue(this);
@@ -154,6 +157,8 @@ public class SearchActivity extends AppCompatActivity implements
                         exampleItemList.add(new ExampleItem(imageurl,name,uri));
                         exampleAdapter.notifyDataSetChanged();
                     }
+                    progressBar.setVisibility(View.GONE);
+                    recyclerViewSearch.setVisibility(View.VISIBLE);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -186,7 +191,7 @@ public class SearchActivity extends AppCompatActivity implements
         requestQueue.add(stringRequest);
     }
 
-
+// spotify functions
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);

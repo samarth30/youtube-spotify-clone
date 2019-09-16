@@ -109,7 +109,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@android:color/holo_orange_dark"
-        android:text="SIGN IN"
+        android:text="already have an account ? SIGN IN"
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:textSize="18sp"

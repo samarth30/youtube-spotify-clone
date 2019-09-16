@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.dell.spotify_clone_main.R;
-
+// platform choose page
 public class Platform_choose extends AppCompatActivity {
 
     @Override

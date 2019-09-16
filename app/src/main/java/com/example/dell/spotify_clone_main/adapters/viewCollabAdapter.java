@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.dell.spotify_clone_main.R;
 
 import java.util.ArrayList;
-
+// view collab adapter
 public class viewCollabAdapter extends RecyclerView.Adapter<viewCollabAdapter.ExampleViewHolder> {
 
     private Context mContext;
@@ -27,7 +27,7 @@ public class viewCollabAdapter extends RecyclerView.Adapter<viewCollabAdapter.Ex
     @NonNull
     @Override
     public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.item_product_vertical,parent,false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.item_collab_xml,parent,false);
         return new ExampleViewHolder(v);
     }
 
@@ -52,12 +52,11 @@ public class viewCollabAdapter extends RecyclerView.Adapter<viewCollabAdapter.Ex
 
     public class ExampleViewHolder extends RecyclerView.ViewHolder{
 
-        public ImageView mImageView;
+
         public TextView mTextViewTitle;
 
         public ExampleViewHolder(@NonNull View itemView) {
             super(itemView);
-            mImageView = itemView.findViewById(R.id.imageView);
             mTextViewTitle = itemView.findViewById(R.id.textViewtitle);
 
 

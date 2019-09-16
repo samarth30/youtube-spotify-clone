@@ -1,5 +1,5 @@
 package com.example.dell.spotify_clone_main.adapters;
-
+// playlist class
 public class Playlist {
     String name;
   int id;

@@ -18,7 +18,7 @@ import com.example.dell.spotify_clone_main.R;
 import com.example.dell.spotify_clone_main.UI.LoginAct;
 import com.example.dell.spotify_clone_main.UI.SharedPrefManager;
 
-
+//spotify user fragment
 public class spotify_user extends Fragment {
 
     View view;

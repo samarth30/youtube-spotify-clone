@@ -1,5 +1,5 @@
 package com.example.dell.spotify_clone_main.adapters;
-
+// view collab class
 public class viewCollab {
     String email;
 

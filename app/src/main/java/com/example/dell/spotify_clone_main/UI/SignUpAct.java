@@ -30,7 +30,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
+// signup page
 public class SignUpAct extends AppCompatActivity {
 
     Animation frombottom, fromtop;
@@ -49,7 +49,6 @@ public class SignUpAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        //volley request quee
 
         frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
         fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
@@ -88,7 +87,7 @@ public class SignUpAct extends AppCompatActivity {
         });
 
     }
-
+// create account fucntion
     private void CreateAccount() {
 
         String email = email_signup.getText().toString().trim();
@@ -117,6 +116,7 @@ public class SignUpAct extends AppCompatActivity {
         }
     }
 
+    // registering you through server
     private void register(final String email, final String password) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {

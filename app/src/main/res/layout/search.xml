@@ -8,6 +8,18 @@
     android:background="#0d0d0d"
     >
 
+    <ProgressBar
+        android:id="@+id/progressbaryoutube"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="245dp"
+        android:layout_marginEnd="155dp"
+        android:layout_marginBottom="438dp"
+        android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/linearlayout"
         android:padding="5dp"
@@ -71,12 +83,16 @@
             android:text="Search"
             android:textColor="@android:color/white" />
     </LinearLayout>
+
+
     <ListView
         android:id="@+id/listview"
-        android:padding="5dp"
-        android:layout_below="@id/linearlayout"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/linearlayout"
+        android:layout_marginTop="4dp"
+        android:padding="5dp">
 
     </ListView>
 

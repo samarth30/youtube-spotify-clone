@@ -12,6 +12,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -34,7 +35,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+// search playlist
 public class Search extends AppCompatActivity {
     String key="s";
     String url = "https://aasthamalik31.pythonanywhere.com/playlist/search_playlist/";
@@ -44,17 +45,19 @@ public class Search extends AppCompatActivity {
     SearchAdapter exampleAdapter;
     EditText searchText;
     RecyclerView recyclerViewSearch;
-
+   ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search2);
-
+        progressBar = findViewById(R.id.progressbarSearch);
         searchText = findViewById(R.id.editText);
         searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                recyclerViewSearch.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
                 key = searchText.getText().toString();
                 parseData(key);
             }
@@ -81,9 +84,8 @@ public class Search extends AppCompatActivity {
         );
     }
 
+//  add collaboration dialog
     private void openDialog(final String id) {
-//        Dialog dialog = new Dialog();
-//        dialog.show(getFragmentManager(),"dialog");
         final AlertDialog.Builder mb = new AlertDialog.Builder(this);
         final View dialog = LayoutInflater.from(this).inflate(R.layout.dialogcollab, null, false);
 
@@ -112,22 +114,12 @@ public class Search extends AppCompatActivity {
                 });
 
 
-//        final Button ok = dialog.findViewById(R.id.ok);
-//        ok.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String playlistname = playlistName.getText().toString();
-//                String password = PlaylistPassword.getText().toString();
-//                addTexts(playlistname,password);
-//            }
-//        });
-
         mb.setView(dialog);
         final AlertDialog ass = mb.create();
 
         ass.show();
     }
-
+//  add collab to server
     private void AddCollab(final String id,final String password) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, addCollab, new Response.Listener<String>() {
             @Override
@@ -170,9 +162,9 @@ public class Search extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-
+// parse data to recycler view
     private void parseData(final String key) {
-
+     progressBar.setVisibility(View.VISIBLE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -187,7 +179,8 @@ public class Search extends AppCompatActivity {
                         exampleItemList.add(new ExampleItem(name,id));
                         exampleAdapter.notifyDataSetChanged();
                     }
-
+                 recyclerViewSearch.setVisibility(View.VISIBLE);
+                 progressBar.setVisibility(View.GONE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

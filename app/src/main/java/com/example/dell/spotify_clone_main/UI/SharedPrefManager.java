@@ -19,7 +19,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-
+// shared prefrences
 public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "volleyregisterlogin";
     private static final String KEY_USERNAME ="name";
@@ -41,11 +41,12 @@ public class SharedPrefManager {
     }
 
     //this method will store the user data in shared preferences
-     public void userLogin(String token) {
+     public void userLogin(String token,String email) {
         TokenMain = token;
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(TOKEN,token);
+        editor.putString(KEY_EMAIL,email);
         editor.apply();
     }
     public String loadToken(){
@@ -53,7 +54,11 @@ public class SharedPrefManager {
         String token = sharedPreferences.getString(TOKEN,"");
         return token.toString();
     }
-
+    public String loadEmail(){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        String email =  sharedPreferences.getString(KEY_EMAIL,"");
+        return email;
+    }
 
     //this method will checker whether user is already logged in or not
     public boolean isLoggedIn() {

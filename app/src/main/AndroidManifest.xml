@@ -11,21 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".youtube_files.Search"></activity>
-        <activity android:name=".youtube_files.detailActivity" />
-        <activity android:name=".spotify_files.rsplayer" />
-        <activity android:name=".spotify_files.SearchActivity2"/>
-        <activity android:name=".spotify_files.SearchActivity" />
-        <activity android:name=".spotify_files.spotify_player_activity_main2" />
-        <activity android:name=".spotify_files.spotify_player_activity_main" />
-        <activity android:name=".youtube_files.youtube_search_activity" />
-        <activity android:name=".youtube_files.playvideoActivity" />
-        <activity android:name=".UI.LoginAct" />
-        <activity android:name=".UI.SignUpAct" />
-        <activity android:name=".UI.spotify" />
-        <activity android:name=".UI.youtube" />
-        <activity android:name=".UI.Platform_choose" />
-        <activity android:name=".UI.MainActivity">
+        <activity android:name=".youtube_files.Search" android:screenOrientation="locked"></activity>
+        <activity android:name=".youtube_files.detailActivity" android:screenOrientation="locked"/>
+        <activity android:name=".spotify_files.rsplayer" android:screenOrientation="locked"/>
+        <activity android:name=".spotify_files.SearchActivity2" android:screenOrientation="locked"/>
+        <activity android:name=".spotify_files.SearchActivity" android:screenOrientation="locked"/>
+        <activity android:name=".spotify_files.spotify_player_activity_main2" android:screenOrientation="locked"/>
+        <activity android:name=".spotify_files.spotify_player_activity_main" android:screenOrientation="locked"/>
+        <activity android:name=".youtube_files.youtube_search_activity" android:screenOrientation="locked"/>
+        <activity android:name=".youtube_files.playvideoActivity" android:screenOrientation="locked"/>
+        <activity android:name=".UI.LoginAct" android:noHistory="true" android:screenOrientation="locked"/>
+        <activity android:name=".UI.SignUpAct" android:noHistory="true" android:screenOrientation="locked"/>
+        <activity android:name=".UI.spotify" android:screenOrientation="locked"/>
+        <activity android:name=".UI.youtube" android:screenOrientation="locked"/>
+        <activity android:name=".UI.Platform_choose" android:screenOrientation="locked"/>
+        <activity android:name=".UI.MainActivity" android:noHistory="true" android:screenOrientation="locked">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
