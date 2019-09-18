@@ -54,11 +54,11 @@ public class viewCollabAdapter extends RecyclerView.Adapter<viewCollabAdapter.Ex
 
 
         public TextView mTextViewTitle;
-
+        public View view;
         public ExampleViewHolder(@NonNull View itemView) {
             super(itemView);
             mTextViewTitle = itemView.findViewById(R.id.textViewtitle);
-
+            view = itemView.findViewById(R.id.view);
 
         }
     }

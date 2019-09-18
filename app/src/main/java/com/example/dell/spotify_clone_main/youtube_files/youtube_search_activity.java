@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.dell.spotify_clone_main.Model.Medium;
 import com.example.dell.spotify_clone_main.Model.ModelData;
@@ -36,13 +39,16 @@ public class youtube_search_activity extends AppCompatActivity {
     public static String idvideo;
     String title;
     String thumbnail;
+    TextView noresults;
     ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
+        noresults = findViewById(R.id.noResultsy);
         progressBar = findViewById(R.id.progressbaryoutube);
         Anhxa();
+        edtsearch.setOnEditorActionListener(editorActionListener);
         btnsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,15 +87,22 @@ public class youtube_search_activity extends AppCompatActivity {
             public void onResponse(Call<ModelData> call, Response<ModelData> response) {
                 ModelData modelData = response.body();
                 mangitem = (ArrayList<Item>) modelData.getItems();
-                youtubeAdapter = new YoutubeAdapter(youtube_search_activity.this, android.R.layout.simple_list_item_1, mangitem);
-                listView.setAdapter(youtubeAdapter);
-                progressBar.setVisibility(View.GONE);
-                listView.setVisibility(View.VISIBLE);
-                Log.d("bbb", modelData.getItems().get(0).getSnippet().getTitle());
+                if(mangitem.size() == 0){
+                    progressBar.setVisibility(View.GONE);
+                    noresults.setVisibility(View.VISIBLE);
+                }
+                else {
+                    youtubeAdapter = new YoutubeAdapter(youtube_search_activity.this, android.R.layout.simple_list_item_1, mangitem);
+                    progressBar.setVisibility(View.GONE);
+                        listView.setAdapter(youtubeAdapter);
+                        listView.setVisibility(View.VISIBLE);
+
+
+                }
             }
             @Override
             public void onFailure(Call<ModelData> call, Throwable t) {
-
+                noresults.setVisibility(View.VISIBLE);
             }
         });
 
@@ -101,4 +114,20 @@ public class youtube_search_activity extends AppCompatActivity {
         listView = findViewById(R.id.listview);
     }
 
+    private TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            switch (actionId){
+                case EditorInfo.IME_ACTION_SEND:
+                    listView.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    String tukhoa = edtsearch.getText().toString();
+                    tukhoa =tukhoa.replace(" ","%20");
+                    Docdulieu(tukhoa);
+                    break;
+            }
+            return false;
+        }
+
+    };
 }

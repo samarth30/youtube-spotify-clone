@@ -55,12 +55,12 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ExampleVie
 
         public ImageView mImageView;
         public TextView mTextViewTitle;
-
+        public View view;
         public ExampleViewHolder(@NonNull View itemView) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.imageView);
             mTextViewTitle = itemView.findViewById(R.id.textViewtitle);
-
+            view = itemView.findViewById(R.id.view);
 
         }
     }

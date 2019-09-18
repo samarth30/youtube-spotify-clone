@@ -10,7 +10,7 @@
     >
 
     <TextView
-        android:id="@+id/textview"
+        android:id="@+id/textviewtitlespotify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -18,6 +18,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="8dp"
+        android:maxLines="2"
+        android:textAlignment="center"
         android:text="Music Palyer"
         android:textColor="@android:color/white"
         android:textSize="35dp"

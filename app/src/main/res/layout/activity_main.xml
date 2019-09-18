@@ -17,7 +17,7 @@
         android:layout_marginTop="220dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text=" Vibe in"
+        android:text=" Vibin"
         android:textColor="@android:color/white"
         android:textSize="70dp"
         app:layout_constraintEnd_toEndOf="parent"

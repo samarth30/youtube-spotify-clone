@@ -6,11 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -69,12 +72,15 @@ public class SearchActivity extends AppCompatActivity implements
 
     String AcessToken;
     ProgressBar progressBar;
+    TextView textviewnoresults;
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         progressBar = findViewById(R.id.progressspotify);
 
+        textviewnoresults = findViewById(R.id.noResults);
+         textviewnoresults.setVisibility(View.GONE);
         final AuthenticationRequest.Builder builder = new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
 //        builder.setScopes(new String[]{"user-read-private", "streaming"});
 //        AuthenticationRequest request = builder.build();
@@ -87,6 +93,7 @@ public class SearchActivity extends AppCompatActivity implements
 
 
         searchText = findViewById(R.id.editText);
+        searchText.setOnEditorActionListener(editorActionListener);
         searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,9 +132,12 @@ public class SearchActivity extends AppCompatActivity implements
                 })
         );
     }
+
+
+
   /// search songs and parse to the recycler view
     private void parseData() {
-
+  textviewnoresults.setVisibility(View.GONE);
         requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -158,7 +168,11 @@ public class SearchActivity extends AppCompatActivity implements
                         exampleAdapter.notifyDataSetChanged();
                     }
                     progressBar.setVisibility(View.GONE);
-                    recyclerViewSearch.setVisibility(View.VISIBLE);
+                    if(exampleItemList.size() == 0){
+                       textviewnoresults.setVisibility(View.VISIBLE);
+                    }else {
+                        recyclerViewSearch.setVisibility(View.VISIBLE);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -190,6 +204,24 @@ public class SearchActivity extends AppCompatActivity implements
 
         requestQueue.add(stringRequest);
     }
+
+    private TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            switch (actionId){
+                case EditorInfo.IME_ACTION_SEND:
+                    progressBar.setVisibility(View.VISIBLE);
+                    recyclerViewSearch.setVisibility(View.GONE);
+                    key = searchText.getText().toString();
+                    url = "https://api.spotify.com/v1/search?q="+key+"&type=track&market=US&limit=10&offset=5";
+                    parseData();
+                    break;
+            }
+            return false;
+        }
+
+    };
+
 
 // spotify functions
     @Override
@@ -251,4 +283,5 @@ public class SearchActivity extends AppCompatActivity implements
     public void onPlaybackError(Error error) {
 
     }
+
 }

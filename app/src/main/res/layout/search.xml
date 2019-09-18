@@ -51,7 +51,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginLeft="0dp"
-                android:layout_marginBottom="13dp"
+                android:layout_marginBottom="9dp"
                 app:srcCompat="@drawable/ic_search_black_24dp" />
 
             <EditText
@@ -63,6 +63,8 @@
                 android:layout_marginTop="1dp"
                 android:layout_toRightOf="@+id/ic_magnify"
                 android:background="@null"
+                android:inputType="text"
+                android:imeOptions="actionSend"
                 android:hint="Enter song you want to listen"
                 android:textColorHint="@android:color/black"
                 android:textColor="#000"
@@ -77,11 +79,11 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="8dp"
-            android:layout_weight="3"
-            android:drawableLeft="@drawable/ic_search_white_24dp"
             android:background="@color/cardview_dark_background"
+            android:drawableRight="@drawable/ic_arrow_forward_white_24dp"
             android:text="Search"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            />
     </LinearLayout>
 
 
@@ -95,5 +97,15 @@
         android:padding="5dp">
 
     </ListView>
-
+    <TextView
+        android:id="@+id/noResultsy"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="498dp"
+        android:text="No Results Found"
+        android:textColor="#ffffff" />
 </RelativeLayout>

@@ -9,7 +9,7 @@
         android:id="@+id/dialog_playlistname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="username"
+        android:hint="playlist name"
         android:inputType="textPersonName"
         />
 

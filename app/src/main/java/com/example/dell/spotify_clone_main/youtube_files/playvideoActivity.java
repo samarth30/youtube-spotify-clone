@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,6 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dell.spotify_clone_main.R;
 import com.example.dell.spotify_clone_main.UI.SharedPrefManager;
+import com.example.dell.spotify_clone_main.adapters.AddToPlaylistAdapter;
 import com.example.dell.spotify_clone_main.adapters.Playlist;
 import com.example.dell.spotify_clone_main.adapters.RecyclerItemClickListener;
 import com.example.dell.spotify_clone_main.adapters.PlaylistRecyclerView;
@@ -72,6 +74,8 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
     ImageView heart,forward,rewind,shuffle,repeatone;
 
     ProgressBar progressBar;
+
+    AddToPlaylistAdapter addToPlaylistAdapter;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +83,12 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
         setContentView(R.layout.activity_playvideo);
         youTubePlayerView = findViewById(R.id.myYoutube);
         youTubePlayerView.initialize(youtube_search_activity.API_KEY, this);
-
+        TextView titlemain  = findViewById(R.id.youtube_title);
         title = getIntent().getExtras().getString("title");
         thumbnail = getIntent().getExtras().getString("thumbnail");
         idvideo = getIntent().getExtras().getString("videoId");
+
+        titlemain.setText(title);
 
         heart = findViewById(R.id.heart);
         forward = findViewById(R.id.fastforward);
@@ -192,8 +198,8 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
         youtubePlayListRecyclerView.setHasFixedSize(true);
         youtubePlayListRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         parseData();
-        adapter = new PlaylistRecyclerView(this,playlistList);
-        youtubePlayListRecyclerView.setAdapter(adapter);
+        addToPlaylistAdapter = new AddToPlaylistAdapter(this,playlistList);
+        youtubePlayListRecyclerView.setAdapter(addToPlaylistAdapter);
 
 
         youtubePlayListRecyclerView.addOnItemTouchListener(
@@ -271,7 +277,7 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
                         String name = jsonObject.getString("name");
                         int id = jsonObject.getInt("id");
                         playlistList.add(new Playlist(name,id));
-                        adapter.notifyDataSetChanged();
+                        addToPlaylistAdapter.notifyDataSetChanged();
                     }
                    progressBar.setVisibility(View.GONE);
                 } catch (JSONException e) {

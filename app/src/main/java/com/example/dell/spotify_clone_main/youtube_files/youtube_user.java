@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.dell.spotify_clone_main.R;
@@ -31,6 +32,18 @@ public class youtube_user extends Fragment {
         String email = sharedPrefManager.loadEmail();
         TextView textView = view.findViewById(R.id.textviewuser);
         textView.setText(email);
+
+        Button Log_out = (Button) view.findViewById(R.id.log_out);
+        Log_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPrefManager.getInstance(context).logout();
+
+                getActivity().finishAffinity();
+
+            }
+        });
+
         return  view;
     }
 }

@@ -20,7 +20,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,6 +35,7 @@ import com.bumptech.glide.Glide;
 import com.crystal.crystalrangeseekbar.widgets.BubbleThumbRangeSeekbar;
 import com.example.dell.spotify_clone_main.R;
 import com.example.dell.spotify_clone_main.UI.SharedPrefManager;
+import com.example.dell.spotify_clone_main.adapters.AddToPlaylistAdapter;
 import com.example.dell.spotify_clone_main.adapters.ExampleAdapter;
 import com.example.dell.spotify_clone_main.adapters.ExampleItem;
 import com.example.dell.spotify_clone_main.adapters.Playlist;
@@ -95,7 +98,7 @@ public class rsplayer extends AppCompatActivity implements
 
     Button addToPlayList;
 
-
+    AddToPlaylistAdapter addToPlaylistAdapter;
 
     RecyclerView youtubePlayListRecyclerView;
     PlaylistRecyclerView adapter;
@@ -104,14 +107,14 @@ public class rsplayer extends AppCompatActivity implements
     String myPlaylist= "https://aasthamalik31.pythonanywhere.com/playlist/my_playlists/";
     String addtrak = "https://aasthamalik31.pythonanywhere.com/playlist/add_trak_to_playlist/";
 
-
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rsplayer);
         Intent intent = getIntent();
         uri = intent.getStringExtra("uri");
-
+        progressBar = findViewById(R.id.progressbarPlayList);
         final AuthenticationRequest.Builder builder = new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
         builder.setScopes(new String[]{"user-read-private", "streaming"});
         AuthenticationRequest request = builder.build();
@@ -120,8 +123,9 @@ public class rsplayer extends AppCompatActivity implements
 
         ImageURL = getIntent().getExtras().getString("image");
         Title = getIntent().getExtras().getString("title");
-        ImageView image = findViewById(R.id.imageRsplayer);
-
+         ImageView image = findViewById(R.id.imageRsplayer);
+        TextView heading = findViewById(R.id.textviewtitlespotify);
+        heading.setText(Title);
         Glide.with(this).load(ImageURL).into(image);
 
 
@@ -196,12 +200,13 @@ public class rsplayer extends AppCompatActivity implements
         final View dialog = LayoutInflater.from(this).inflate(R.layout.dialog_add_to_playlist, null, false);
 
         playlistList = new ArrayList<>();
+        progressBar = dialog.findViewById(R.id.progressbarPlayList);
         youtubePlayListRecyclerView = dialog.findViewById(R.id.playlists);
         youtubePlayListRecyclerView.setHasFixedSize(true);
         youtubePlayListRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         parseData();
-        adapter = new PlaylistRecyclerView(this,playlistList);
-        youtubePlayListRecyclerView.setAdapter(adapter);
+        addToPlaylistAdapter= new AddToPlaylistAdapter(this,playlistList);
+        youtubePlayListRecyclerView.setAdapter(addToPlaylistAdapter);
 
 
         youtubePlayListRecyclerView.addOnItemTouchListener(
@@ -223,6 +228,7 @@ public class rsplayer extends AppCompatActivity implements
 
     // add song to server
     private void AddThisToPlaylist( final int id,final String title,final String thumbnail) {
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, addtrak, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -267,6 +273,7 @@ public class rsplayer extends AppCompatActivity implements
 
     // parse the playlists to recycler view
     private void parseData() {
+progressBar.setVisibility(View.VISIBLE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, myPlaylist, new Response.Listener<String>() {
             @Override
             public void onResponse(String response){
@@ -278,9 +285,9 @@ public class rsplayer extends AppCompatActivity implements
                         String name = jsonObject.getString("name");
                         int id = jsonObject.getInt("id");
                         playlistList.add(new Playlist(name,id));
-                        adapter.notifyDataSetChanged();
+                        addToPlaylistAdapter.notifyDataSetChanged();
                     }
-
+progressBar.setVisibility(View.GONE);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

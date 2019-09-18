@@ -27,6 +27,7 @@ public class YoutubeAdapter extends ArrayAdapter<Item> {
     class ViewHolder{
         TextView txtTen;
         ImageView imghinh;
+
     }
     @NonNull
     @Override
@@ -38,6 +39,7 @@ public class YoutubeAdapter extends ArrayAdapter<Item> {
             viewHolder = new ViewHolder();
             viewHolder.imghinh = convertView.findViewById(R.id.imageviewThumbnail);
             viewHolder.txtTen = convertView.findViewById(R.id.textviewTitle);
+
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();

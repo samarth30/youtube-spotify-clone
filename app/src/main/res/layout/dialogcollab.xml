@@ -7,6 +7,7 @@
         android:id="@+id/password"
         android:layout_marginLeft="44dp"
         android:layout_marginRight="44dp"
+        android:hint="enter the password of this playlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </RelativeLayout>
