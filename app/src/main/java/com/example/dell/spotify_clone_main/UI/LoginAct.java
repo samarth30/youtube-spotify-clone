@@ -40,6 +40,7 @@ public class LoginAct extends AppCompatActivity {
     TextView textView1;
     EditText password_login, email_login;
     ProgressBar loading;
+    TextView text;
 
 
     String URL = "https://aasthamalik31.pythonanywhere.com/user/login/";
@@ -58,7 +59,7 @@ public class LoginAct extends AppCompatActivity {
 
         frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
         fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
-
+        text = findViewById(R.id.text);
         loading = (ProgressBar) findViewById(R.id.loading_login);
         btnjoin_login = (Button) findViewById(R.id.btnjoin_login);
         btnLogin_login = (Button) findViewById(R.id.btnlogin_login);
@@ -73,7 +74,7 @@ public class LoginAct extends AppCompatActivity {
 
         email_login.startAnimation(fromtop);
         password_login.startAnimation(fromtop);
-
+        text.startAnimation(frombottom);
         btnjoin_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

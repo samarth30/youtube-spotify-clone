@@ -34,16 +34,20 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_circle_black_24dp" />
+        android:backgroundTint="#ffffff"
+        app:borderWidth="0dp"
+        app:srcCompat="@drawable/ic_add_black_24dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/search"
+        android:backgroundTint="#ffffff"
         android:layout_width="wrap_content"
+        app:borderWidth="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="80dp"
-        app:srcCompat="@drawable/ic_search_white_24dp"
+        app:srcCompat="@drawable/ic_search_blackkk_24dp"
         tools:layout_editor_absoluteX="255dp"
         tools:layout_editor_absoluteY="659dp" />
 

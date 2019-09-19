@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dell.spotify_clone_main.R;
 import com.example.dell.spotify_clone_main.UI.SharedPrefManager;
+import com.example.dell.spotify_clone_main.adapters.DetailActivityAdapter;
 import com.example.dell.spotify_clone_main.adapters.ExampleAdapter;
 import com.example.dell.spotify_clone_main.adapters.Playlist;
 import com.example.dell.spotify_clone_main.adapters.PlaylistRecyclerView;
@@ -39,6 +40,7 @@ public class detailActivity extends AppCompatActivity {
 
     RecyclerView PlayListRecyclerView;
     ExampleAdapter adapter;
+    DetailActivityAdapter detailActivityAdapter;
     ArrayList<ExampleItem> playlistList;
     String playlist_detail = "https://aasthamalik31.pythonanywhere.com/playlist/playlist_detail/";
     String view_collab = "https://aasthamalik31.pythonanywhere.com/playlist/view_collab/";
@@ -64,8 +66,8 @@ public class detailActivity extends AppCompatActivity {
         PlayListRecyclerView.setHasFixedSize(true);
         PlayListRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
-        adapter = new ExampleAdapter(this,playlistList);
-        PlayListRecyclerView.setAdapter(adapter);
+        detailActivityAdapter = new DetailActivityAdapter(this,playlistList);
+        PlayListRecyclerView.setAdapter(detailActivityAdapter);
 
         PlayListRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
@@ -86,7 +88,7 @@ public class detailActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else if(type.equals("spotify")){
-                            Intent intent = new Intent(detailActivity.this,com.example.dell.spotify_clone_main.spotify_files.spotify_player_activity_main2.class);
+                            Intent intent = new Intent(detailActivity.this,com.example.dell.spotify_clone_main.spotify_files.rsplayer.class);
                             String songid = currentItem.getId();
                             String name = currentItem.getmTitle();
                             String image = currentItem.getImageUrl();
@@ -190,7 +192,7 @@ public class detailActivity extends AppCompatActivity {
                         String name = jsonObject.getString("name");
 
                         playlistList.add(new ExampleItem(image,name,track_id,type));
-                        adapter.notifyDataSetChanged();
+                        detailActivityAdapter.notifyDataSetChanged();
                     }
                 progressBar.setVisibility(View.GONE);
 

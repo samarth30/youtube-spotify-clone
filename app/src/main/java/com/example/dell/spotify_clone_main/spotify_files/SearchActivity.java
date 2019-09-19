@@ -73,6 +73,8 @@ public class SearchActivity extends AppCompatActivity implements
     String AcessToken;
     ProgressBar progressBar;
     TextView textviewnoresults;
+
+    static int x=1;
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,14 +89,22 @@ public class SearchActivity extends AppCompatActivity implements
 
 //        AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
 
-
         AcessToken = getIntent().getExtras().getString("token");
         requestQueue = Volley.newRequestQueue(this);
 
 
-        searchText = findViewById(R.id.editText);
+        searchText = findViewById(R.id.edittextSearchspotify);
         searchText.setOnEditorActionListener(editorActionListener);
-        searchButton = findViewById(R.id.searchButton);
+        searchButton = findViewById(R.id.buttonSearchspotify);
+
+         String text = getIntent().getExtras().getString("search");
+        if(!text.equals(null)){
+            progressBar.setVisibility(View.VISIBLE);
+            searchText.setText(text);
+            key = text;
+            url = "https://api.spotify.com/v1/search?q="+key+"&type=track&market=US&limit=10&offset=5";
+            parseData();
+        }
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

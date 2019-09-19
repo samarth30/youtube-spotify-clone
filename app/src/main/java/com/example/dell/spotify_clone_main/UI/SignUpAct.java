@@ -48,7 +48,7 @@ public class SignUpAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
+        TextView text = findViewById(R.id.textviewtext);
 
         frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
         fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
@@ -66,6 +66,7 @@ public class SignUpAct extends AppCompatActivity {
         btnjoin_signup.startAnimation(frombottom);
         btnLogin_signup.startAnimation(frombottom);
 
+        text.startAnimation(frombottom);
         textView2.startAnimation(fromtop);
 
         email_signup.startAnimation(fromtop);

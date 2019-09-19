@@ -100,7 +100,7 @@
         app:layout_constraintTop_toBottomOf="@+id/password_signup" />
 
     <TextView
-        android:id="@+id/textview"
+        android:id="@+id/textviewtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -16,14 +16,14 @@
         android:id="@+id/imageView"
         android:layout_width="61dp"
         android:layout_height="64dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="4dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_playlist_play_black_24dp" />
+        app:srcCompat="@drawable/musicplayericon" />
 
 
     <TextView
@@ -31,7 +31,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:text="Dutch"
         android:textColor="@android:color/white"

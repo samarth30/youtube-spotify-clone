@@ -49,11 +49,12 @@ public class spotify_player_activity_main extends Activity implements
     ExampleAdapter exampleAdapter;
     EditText searchText;
     RecyclerView recyclerViewSearch;
+    String text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spotify_player_main);
-
+        text = getIntent().getExtras().getString("search");
         final AuthenticationRequest.Builder builder = new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
         builder.setScopes(new String[]{"user-read-private", "streaming"});
         AuthenticationRequest request = builder.build();
@@ -80,6 +81,7 @@ public class spotify_player_activity_main extends Activity implements
                     public void onInitialized(SpotifyPlayer spotifyPlayer) {
                         Intent intent1 = new Intent(spotify_player_activity_main.this,SearchActivity.class);
                         intent1.putExtra("token",response.getAccessToken());
+                        intent1.putExtra("search",text);
                         startActivity(intent1);
 //                        mPlayer = spotifyPlayer;
 //                        mPlayer.addConnectionStateCallback(spotify_player_activity_main.this);
