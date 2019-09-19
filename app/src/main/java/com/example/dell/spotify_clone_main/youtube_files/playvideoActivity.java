@@ -180,6 +180,7 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
             @Override
             public void onClick(View v) {
                 player.pause();
+                Play_Pause.setBackground(getDrawable(R.drawable.ic_play_circle_filled_black_24dp));
                 dialog();
             }
         });

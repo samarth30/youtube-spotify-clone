@@ -7,7 +7,7 @@
     tools:context=".spotify_files.SearchActivity">
 
 
-    <include layout="@layout/content_search" />
+    <include layout="@layout/content_search"  />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

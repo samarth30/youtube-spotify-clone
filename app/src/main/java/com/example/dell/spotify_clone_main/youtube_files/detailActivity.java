@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -49,7 +50,7 @@ public class detailActivity extends AppCompatActivity {
     ArrayList<viewCollab> viewcollabList;
     viewCollabAdapter ViewCollabAdapter;
     RecyclerView viewCollabRecyclerView;
-
+    TextView textView;
     ProgressBar progressBar;
     ProgressBar progressBarViewCollab;
     @Override
@@ -60,7 +61,7 @@ public class detailActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressbardetail);
         progressBar.setVisibility(View.VISIBLE);
         playlistList = new ArrayList<>();
-
+        textView = findViewById(R.id.textviewdetailpage);
         parseData();
         PlayListRecyclerView = findViewById(R.id.recyclerViewPlaylist);
         PlayListRecyclerView.setHasFixedSize(true);
@@ -194,7 +195,13 @@ public class detailActivity extends AppCompatActivity {
                         playlistList.add(new ExampleItem(image,name,track_id,type));
                         detailActivityAdapter.notifyDataSetChanged();
                     }
-                progressBar.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
+                   if(playlistList.size() == 0){
+                       textView.setVisibility(View.VISIBLE);
+                       PlayListRecyclerView.setVisibility(View.GONE);
+                   }
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

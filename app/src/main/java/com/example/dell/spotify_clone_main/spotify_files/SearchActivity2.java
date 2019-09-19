@@ -95,7 +95,7 @@ public class SearchActivity2 extends AppCompatActivity implements
 
         startActivity(intent1);
 
-        searchText = findViewById(R.id.editText);
+        searchText = findViewById(R.id.editTextsearchplaylist);
         searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override

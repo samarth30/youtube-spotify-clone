@@ -18,17 +18,18 @@
         android:maxLines="2"
         android:text="youtube"
         android:textColor="#ffffff"
-        android:textSize="30dp"
+        android:textSize="17dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/myYoutube"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="150dp"
+        android:layout_width="311dp"
+        android:layout_height="199dp"
+        android:layout_marginTop="204dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

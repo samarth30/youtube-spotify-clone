@@ -49,7 +49,7 @@
 
             <EditText
                 android:id="@+id/edittextSearchspotify"
-                android:layout_width="221dp"
+                android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="1dp"
@@ -71,6 +71,7 @@
             android:id="@+id/buttonSearchspotify"
             android:layout_width="90dp"
             android:layout_height="44dp"
+            android:visibility="gone"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="8dp"

@@ -19,7 +19,7 @@
 
         <RelativeLayout
             android:id="@+id/relLayout1"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="7dp"
@@ -45,15 +45,17 @@
                 app:srcCompat="@drawable/ic_search_black_24dp" />
 
             <EditText
-                android:id="@+id/editText"
-                android:layout_width="292dp"
+                android:id="@+id/editTextsearchplaylist"
+                android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_toRightOf="@+id/ic_magnify"
                 android:background="@null"
-                android:hint="Enter the name of playlist"
+                android:inputType="text"
+                android:imeOptions="actionSend"
+                android:hint="search your playlist"
                 android:textColorHint="@android:color/black"
                 android:textColor="#000"
                 android:textSize="16sp" />
@@ -64,6 +66,7 @@
             android:id="@+id/searchButton"
             android:layout_width="wrap_content"
             android:layout_height="44dp"
+            android:visibility="gone"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="8dp"
@@ -84,6 +87,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textsearchplaylista"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="153dp"
+        android:layout_marginTop="159dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginBottom="553dp"
+        android:text="no playlist found"
+        android:textColor="#ffffff" />
 
     <ProgressBar
         android:id="@+id/progressbarSearch"

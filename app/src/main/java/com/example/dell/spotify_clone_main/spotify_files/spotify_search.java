@@ -22,6 +22,7 @@ import com.example.dell.spotify_clone_main.youtube_files.youtube_search_activity
 public class spotify_search extends Fragment {
 
 
+
     View view;
     Context mContext;
     EditText editTextsearch;

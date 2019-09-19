@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -46,12 +49,15 @@ public class Search extends AppCompatActivity {
     EditText searchText;
     RecyclerView recyclerViewSearch;
    ProgressBar progressBar;
+   TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search2);
         progressBar = findViewById(R.id.progressbarSearch);
-        searchText = findViewById(R.id.editText);
+        searchText = findViewById(R.id.editTextsearchplaylist);
+        searchText.setOnEditorActionListener(editorActionListener);
+        textView = findViewById(R.id.textsearchplaylista);
         searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,8 +185,15 @@ public class Search extends AppCompatActivity {
                         exampleItemList.add(new ExampleItem(name,id));
                         exampleAdapter.notifyDataSetChanged();
                     }
-                 recyclerViewSearch.setVisibility(View.VISIBLE);
-                 progressBar.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
+                   if(exampleItemList.size() == 0){
+                       textView.setVisibility(View.VISIBLE);
+                   }else{
+                       recyclerViewSearch.setVisibility(View.VISIBLE);
+
+                   }
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -210,4 +223,20 @@ public class Search extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+
+    private TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            switch (actionId){
+                case EditorInfo.IME_ACTION_SEND:
+                    recyclerViewSearch.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    key = searchText.getText().toString();
+                    parseData(key);
+            }
+            return false;
+        }
+
+    };
 }
+

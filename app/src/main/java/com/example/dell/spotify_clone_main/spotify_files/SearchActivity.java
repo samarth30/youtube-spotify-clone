@@ -26,6 +26,7 @@ import com.example.dell.spotify_clone_main.R;
 import com.example.dell.spotify_clone_main.adapters.ExampleAdapter;
 import com.example.dell.spotify_clone_main.adapters.ExampleItem;
 import com.example.dell.spotify_clone_main.adapters.RecyclerItemClickListener;
+import com.example.dell.spotify_clone_main.youtube_files.Search;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
@@ -96,9 +97,9 @@ public class SearchActivity extends AppCompatActivity implements
         searchText = findViewById(R.id.edittextSearchspotify);
         searchText.setOnEditorActionListener(editorActionListener);
         searchButton = findViewById(R.id.buttonSearchspotify);
-
+         progressBar.setVisibility(View.GONE);
          String text = getIntent().getExtras().getString("search");
-        if(!text.equals(null)){
+        if(!text.equals("")){
             progressBar.setVisibility(View.VISIBLE);
             searchText.setText(text);
             key = text;
@@ -143,9 +144,14 @@ public class SearchActivity extends AppCompatActivity implements
         );
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(SearchActivity.this,spotify_search.class);
+        startActivity(intent);
+    }
 
-
-  /// search songs and parse to the recycler view
+    /// search songs and parse to the recycler view
     private void parseData() {
   textviewnoresults.setVisibility(View.GONE);
         requestQueue = Volley.newRequestQueue(this);
