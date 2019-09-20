@@ -14,7 +14,7 @@
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:text="Add To PlayLists"
+        android:text="Add To Playlists"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
