@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -48,7 +49,7 @@ public class spotify_playlist extends Fragment {
     RecyclerView spotifyPlayListRecyclerView;
     PlaylistRecyclerView adapter;
     ArrayList<Playlist> playlistList;
-
+    TextView textView;
     ProgressBar progressBar;
     public spotify_playlist() {
         // Required empty public constructor
@@ -62,7 +63,7 @@ public class spotify_playlist extends Fragment {
         progressBar = view.findViewById(R.id.progressbar);
         requestQueue = Volley.newRequestQueue(context);
         FloatingActionButton floatingActionButton = view.findViewById(R.id.fab);
-
+        textView  = view.findViewById(R.id.textviewplaylistfragment);
         playlistList = new ArrayList<>();
 
         parseData();
@@ -122,6 +123,12 @@ public class spotify_playlist extends Fragment {
                     }
 
                     progressBar.setVisibility(View.GONE);
+                    if(playlistList.size() == 0){
+                        textView.setVisibility(View.VISIBLE);
+                    }else{
+                        textView.setVisibility(View.GONE);
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

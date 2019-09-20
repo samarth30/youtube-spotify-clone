@@ -74,7 +74,7 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
     ImageView heart,forward,rewind,shuffle,repeatone;
 
     ProgressBar progressBar;
-
+    TextView textVieww;
     AddToPlaylistAdapter addToPlaylistAdapter;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -194,6 +194,7 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
 
         playlistList = new ArrayList<>();
         youtubePlayListRecyclerView = dialog.findViewById(R.id.playlists);
+        textVieww = dialog.findViewById(R.id.textviewplaylistplayer);
         progressBar = dialog.findViewById(R.id.progressbarPlayList);
         progressBar.setVisibility(View.VISIBLE);
         youtubePlayListRecyclerView.setHasFixedSize(true);
@@ -281,6 +282,12 @@ public class playvideoActivity extends YouTubeBaseActivity implements YouTubePla
                         addToPlaylistAdapter.notifyDataSetChanged();
                     }
                    progressBar.setVisibility(View.GONE);
+
+                    if(playlistList.size() == 0){
+                        textVieww.setVisibility(View.VISIBLE);
+                    }else{
+                        textVieww.setVisibility(View.GONE);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

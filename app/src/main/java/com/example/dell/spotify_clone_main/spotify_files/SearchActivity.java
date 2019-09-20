@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -23,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dell.spotify_clone_main.R;
+import com.example.dell.spotify_clone_main.UI.spotify;
 import com.example.dell.spotify_clone_main.adapters.ExampleAdapter;
 import com.example.dell.spotify_clone_main.adapters.ExampleItem;
 import com.example.dell.spotify_clone_main.adapters.RecyclerItemClickListener;
@@ -74,7 +77,7 @@ public class SearchActivity extends AppCompatActivity implements
     String AcessToken;
     ProgressBar progressBar;
     TextView textviewnoresults;
-
+    TextView searchsomething;
     static int x=1;
      @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +96,8 @@ public class SearchActivity extends AppCompatActivity implements
         AcessToken = getIntent().getExtras().getString("token");
         requestQueue = Volley.newRequestQueue(this);
 
-
+        searchsomething = findViewById(R.id.searchid);
+        searchsomething.setVisibility(View.GONE);
         searchText = findViewById(R.id.edittextSearchspotify);
         searchText.setOnEditorActionListener(editorActionListener);
         searchButton = findViewById(R.id.buttonSearchspotify);
@@ -106,6 +110,12 @@ public class SearchActivity extends AppCompatActivity implements
             url = "https://api.spotify.com/v1/search?q="+key+"&type=track&market=US&limit=10&offset=5";
             parseData();
         }
+        if(searchText.getText().toString().isEmpty()){
+            searchsomething.setVisibility(View.VISIBLE);
+        }
+
+
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,7 +157,8 @@ public class SearchActivity extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(SearchActivity.this,spotify_search.class);
+        Intent intent = new Intent(SearchActivity.this, spotify.class);
+        finish();
         startActivity(intent);
     }
 
@@ -225,12 +236,19 @@ public class SearchActivity extends AppCompatActivity implements
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             switch (actionId){
-                case EditorInfo.IME_ACTION_SEND:
-                    progressBar.setVisibility(View.VISIBLE);
-                    recyclerViewSearch.setVisibility(View.GONE);
-                    key = searchText.getText().toString();
-                    url = "https://api.spotify.com/v1/search?q="+key+"&type=track&market=US&limit=10&offset=5";
-                    parseData();
+                case EditorInfo.IME_ACTION_SEARCH:
+                    if(searchText.getText().toString().isEmpty()){
+                        recyclerViewSearch.setVisibility(View.GONE);
+                        searchsomething.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                    }else {
+                        searchsomething.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.VISIBLE);
+                        recyclerViewSearch.setVisibility(View.GONE);
+                        key = searchText.getText().toString();
+                        url = "https://api.spotify.com/v1/search?q=" + key + "&type=track&market=US&limit=10&offset=5";
+                        parseData();
+                    }
                     break;
             }
             return false;

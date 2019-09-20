@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -49,6 +50,7 @@ public class youtube_playlist extends Fragment{
     PlaylistRecyclerView adapter;
     ArrayList<Playlist> playlistList;
     ProgressBar progressBar;
+    TextView textView;
     public youtube_playlist() {
 
     }
@@ -61,6 +63,8 @@ public class youtube_playlist extends Fragment{
         progressBar = view.findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
         requestQueue = Volley.newRequestQueue(context);
+        textView  = view.findViewById(R.id.textviewplaylistfragment);
+
         FloatingActionButton floatingActionButton = view.findViewById(R.id.fab);
         FloatingActionButton search = view.findViewById(R.id.search);
         playlistList = new ArrayList<>();
@@ -122,6 +126,11 @@ public class youtube_playlist extends Fragment{
                         adapter.notifyDataSetChanged();
                     }
                     progressBar.setVisibility(View.GONE);
+                    if(playlistList.size() == 0){
+                        textView.setVisibility(View.VISIBLE);
+                    }else{
+                        textView.setVisibility(View.GONE);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

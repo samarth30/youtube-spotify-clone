@@ -129,7 +129,7 @@ public class SignUpAct extends AppCompatActivity {
 
 
                     if (UserCreated) {
-                        Toast.makeText(SignUpAct.this, "Successfully signed in", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpAct.this, "Successfully Created your account", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SignUpAct.this, LoginAct.class);
                         startActivity(intent);
                     }

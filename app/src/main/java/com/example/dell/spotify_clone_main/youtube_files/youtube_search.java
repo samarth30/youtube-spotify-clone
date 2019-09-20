@@ -64,7 +64,7 @@ public class youtube_search extends Fragment {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             switch (actionId){
-                case EditorInfo.IME_ACTION_SEND:
+                case EditorInfo.IME_ACTION_SEARCH:
                     String text = editTextsearch.getText().toString();
                     Intent intent = new Intent(mContext,youtube_search_activity.class);
                     intent.putExtra("search",text);

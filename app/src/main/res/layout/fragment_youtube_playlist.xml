@@ -51,4 +51,13 @@
         tools:layout_editor_absoluteX="255dp"
         tools:layout_editor_absoluteY="659dp" />
 
+
+    <TextView
+        android:id="@+id/textviewplaylistfragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical|center"
+        android:text="No Playlist Created Yet"
+        android:textColor="#ffffff" />
 </FrameLayout>

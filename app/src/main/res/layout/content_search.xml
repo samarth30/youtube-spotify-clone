@@ -59,13 +59,14 @@
                 android:layout_toRightOf="@+id/ic_magnify"
                 android:background="@null"
                 android:hint="Enter song you want to listen"
-                android:imeOptions="actionSend"
+                android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:textColor="#000"
                 android:textColorHint="@android:color/black"
                 android:textSize="16sp" />
 
         </RelativeLayout>
+
 
         <Button
             android:id="@+id/buttonSearchspotify"
@@ -80,6 +81,20 @@
             android:text="Search"
             android:textColor="@android:color/white" />
     </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/searchid"
+        android:layout_width="134dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="498dp"
+        android:text="search something"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:visibility="visible" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

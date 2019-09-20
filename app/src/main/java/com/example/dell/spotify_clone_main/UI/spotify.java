@@ -86,6 +86,7 @@ public class spotify extends AppCompatActivity implements
         spotify_user = new spotify_user();
         spotify_search = new spotify_search();
 
+
         setFragment(spotify_search);
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -70,13 +70,14 @@
                 android:layout_toRightOf="@+id/ic_magnify"
                 android:background="@null"
                 android:hint="Enter song you want to listen"
-                android:imeOptions="actionSend"
+                android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:textColor="#000"
                 android:textColorHint="@android:color/black"
                 android:textSize="16sp" />
 
         </RelativeLayout>
+
 
         <Button
             android:id="@+id/buttonSearch"
@@ -92,6 +93,18 @@
             android:textColor="@android:color/white" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/searchidy"
+        android:layout_width="134dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="498dp"
+        android:text="search something"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:visibility="gone" />
 
     <ListView
         android:id="@+id/listview"

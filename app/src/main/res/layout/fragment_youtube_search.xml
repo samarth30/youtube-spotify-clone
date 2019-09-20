@@ -64,7 +64,7 @@
                 android:layout_toRightOf="@+id/ic_magnify"
                 android:background="@null"
                 android:hint="Enter song you want to listen"
-                android:imeOptions="actionSend"
+                android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:textColor="#000"
                 android:textColorHint="@android:color/black"

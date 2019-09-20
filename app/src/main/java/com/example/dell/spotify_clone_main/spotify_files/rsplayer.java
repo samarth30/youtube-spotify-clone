@@ -107,6 +107,8 @@ public class rsplayer extends AppCompatActivity implements
     String myPlaylist= "https://aasthamalik31.pythonanywhere.com/playlist/my_playlists/";
     String addtrak = "https://aasthamalik31.pythonanywhere.com/playlist/add_trak_to_playlist/";
 
+
+    TextView textView;
     ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,6 +204,7 @@ public class rsplayer extends AppCompatActivity implements
         playlistList = new ArrayList<>();
         progressBar = dialog.findViewById(R.id.progressbarPlayList);
         youtubePlayListRecyclerView = dialog.findViewById(R.id.playlists);
+        textView = dialog.findViewById(R.id.textviewplaylistplayer);
         youtubePlayListRecyclerView.setHasFixedSize(true);
         youtubePlayListRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         parseData();
@@ -287,7 +290,13 @@ progressBar.setVisibility(View.VISIBLE);
                         playlistList.add(new Playlist(name,id));
                         addToPlaylistAdapter.notifyDataSetChanged();
                     }
-progressBar.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
+                    if(playlistList.size() == 0){
+                        textView.setVisibility(View.VISIBLE);
+                    }else{
+                        textView.setVisibility(View.GONE);
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

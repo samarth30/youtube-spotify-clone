@@ -50,10 +50,12 @@ public class Search extends AppCompatActivity {
     RecyclerView recyclerViewSearch;
    ProgressBar progressBar;
    TextView textView;
+    TextView textSearched;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search2);
+        textSearched = findViewById(R.id.textviewSearched);
         progressBar = findViewById(R.id.progressbarSearch);
         searchText = findViewById(R.id.editTextsearchplaylist);
         searchText.setOnEditorActionListener(editorActionListener);
@@ -228,7 +230,8 @@ public class Search extends AppCompatActivity {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             switch (actionId){
-                case EditorInfo.IME_ACTION_SEND:
+                case EditorInfo.IME_ACTION_SEARCH:
+                    textSearched.setVisibility(View.GONE);
                     recyclerViewSearch.setVisibility(View.GONE);
                     progressBar.setVisibility(View.VISIBLE);
                     key = searchText.getText().toString();

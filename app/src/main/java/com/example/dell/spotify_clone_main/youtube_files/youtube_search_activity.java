@@ -41,6 +41,8 @@ public class youtube_search_activity extends AppCompatActivity {
     String thumbnail;
     TextView noresults;
     ProgressBar progressBar;
+
+    TextView searchsomething;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,7 @@ public class youtube_search_activity extends AppCompatActivity {
         noresults = findViewById(R.id.noResultsy);
         progressBar = findViewById(R.id.progressbaryoutube);
         Anhxa();
+        searchsomething = findViewById(R.id.searchidy);
         String text = getIntent().getExtras().getString("search");
         if(!text.equals("")) {
 
@@ -59,6 +62,9 @@ public class youtube_search_activity extends AppCompatActivity {
             Docdulieu(tukhoa);
         }
 
+        if(edtsearch.getText().toString().isEmpty()){
+            searchsomething.setVisibility(View.VISIBLE);
+        }
 
         edtsearch.setOnEditorActionListener(editorActionListener);
         btnsearch.setOnClickListener(new View.OnClickListener() {
@@ -130,12 +136,20 @@ public class youtube_search_activity extends AppCompatActivity {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             switch (actionId){
-                case EditorInfo.IME_ACTION_SEND:
-                    listView.setVisibility(View.GONE);
-                    progressBar.setVisibility(View.VISIBLE);
-                    String tukhoa = edtsearch.getText().toString();
-                    tukhoa =tukhoa.replace(" ","%20");
-                    Docdulieu(tukhoa);
+                case EditorInfo.IME_ACTION_SEARCH:
+
+                    if(edtsearch.getText().toString().isEmpty()){
+                        listView.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
+                        searchsomething.setVisibility(View.VISIBLE);
+                    }else {
+                        searchsomething.setVisibility(View.GONE);
+                        listView.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.VISIBLE);
+                        String tukhoa = edtsearch.getText().toString();
+                        tukhoa = tukhoa.replace(" ", "%20");
+                        Docdulieu(tukhoa);
+                    }
                     break;
             }
             return false;
