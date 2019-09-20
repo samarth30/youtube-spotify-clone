@@ -158,7 +158,7 @@ public class SearchActivity extends AppCompatActivity implements
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(SearchActivity.this, spotify.class);
-        finish();
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

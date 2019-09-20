@@ -22,7 +22,7 @@
         android:textAlignment="center"
         android:text="Music Palyer"
         android:textColor="@android:color/white"
-        android:textSize="35dp"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

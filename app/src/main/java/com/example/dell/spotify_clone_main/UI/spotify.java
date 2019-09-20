@@ -87,6 +87,7 @@ public class spotify extends AppCompatActivity implements
         spotify_search = new spotify_search();
 
 
+
         setFragment(spotify_search);
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -108,6 +109,14 @@ public class spotify extends AppCompatActivity implements
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this,Platform_choose.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     public void setFragment(Fragment fragment){
